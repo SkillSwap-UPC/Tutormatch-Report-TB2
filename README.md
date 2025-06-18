@@ -3303,6 +3303,334 @@ El despliegue del frontend de la aplicación se realiza mediante la plataforma N
 ![](assets/Aspose.Words.3512cffb-c000-4760-a8ee-a98d826675de.200.jpeg)
 
 
+**Capítulo VII: DevOps Practices**
+
+1. Continuous Integration 
+
+Para el proyecto TutorMatch, desarrollado con React y TypeScript, hemos implementado un sistema de integración continua basado en GitHub Actions. Utilizamos Vitest como framework principal de testing, complementado con React Testing Library para evaluar los componentes de UI desde la perspectiva del usuario. Con cada commit, nuestro pipeline ejecuta una serie de pasos automatizados que incluyen validación de código con ESLint, comprobación de tipos con TypeScript, pruebas unitarias e integraciones, y despliegue automático a Netlify. 
+
+En proyectos donde utilizamos NestJS, empleamos Jest, el framework de testing oficial y preconfigurado, que ofrece excelente soporte para TypeScript. Esta combinación de herramientas nos permite detectar errores de forma temprana, mantener la calidad del código y acelerar el desarrollo de nuevas funcionalidades. 
+
+1. Tools and Practices. 
+
+Para la implementación de TutorMatch, desplegamos el frontend en Netlify y el backend en  Railway.  Adoptamos  Gitflow  para  la  gestión  de  ramas  en  GitHub,  junto  con Conventional Commits para una estructura clara en nuestros mensajes de commit y SemVer  para  el  versionamiento.  Implementamos  integración  continua  con  GitHub Actions, ejecutando automáticamente validación con ESLint, comprobación de tipos con TypeScript, y pruebas con Vitest y React Testing Library para el frontend y Jest para componentes NestJS. Esta infraestructura nos permite detectar errores tempranamente y mantener alta calidad en el código. 
+
+||Jasmine  |Jest  |Cypress  |
+| :- | - | - | - |
+|Características  |` `Framework de testing para JavaScript/TypeScript desarrollado por Facebook. Ofrece una solución completa "todo en uno" con runner de tests, assertions, mocks y cobertura de código integrados. Viene preconfigurado para proyectos React, Next.js y muchos otros frameworks. Su modo watch permite ejecución automatizada de tests al detectar cambios, con filtrado inteligente de pruebas relacionadas. Incluye testing de snapshots |<p>` `Framework BDD (Behavior-Driven Development) para JavaScript que no requiere dependencias adicionales. Utiliza una sintaxis legible y descriptiva con describe(), it(), beforeEach() y afterEach(). Incluye un sistema  de expectativas (expects) y comparadores (matchers) expresivos y extensibles. </p><p>` `Proporciona spies integrados para simular, rastrear y verificar llamadas </p>|<p>Framework de testing end-to-end </p><p>` `que ejecuta pruebas directamente en navegadores reales. Proporciona una </p><p>` `interfaz gráfica </p><p>` `interactiva para depuración con timeline visual, snapshots en cada paso y grabación automática de videos. Ofrece esperas automáticas inteligentes sin necesidad de timeouts o retries manuales. Permite acceso directo al DOM, red, almacenamiento local y cookies del </p>|
+
+
+
+||para UI, simulación del DOM con JSDOM, y potentes capacidades de mocking incluyendo módulos completos, implementaciones personalizadas y espías de funciones. Soporta pruebas asíncronas con Promises, async/await y callbacks. Su paralelización inteligente de pruebas optimiza el tiempo de ejecución, especialmente en CI/CD. Proporciona reportes de cobertura de código detallados y una sintaxis clara basada en describe/it y matchers expresivos.  |<p>a funciones. Soporta pruebas asíncronas mediante callbacks, Promises y async/await. Admite configuración personalizada para diferentes entornos, incluyendo navegadores y Node.js. Fomenta la documentación autoexplicativa con sus estructuras anidadas de suites de prueba. Ofrece capacidades de mocking para </p><p>` `simular objetos complejos y aislar el código bajo prueba. Incluye herramientas de reporte personalizables para visualizar resultados de pruebas.  </p>|<p>navegador durante las pruebas. Incluye herramientas de stub, spy y clock para controlar el comportamiento de la aplicación. Facilita la simulación de estados de la aplicación y puede preservar el estado entre pruebas. Soporta pruebas en múltiples navegadores y </p><p>` `configuraciones responsive. Proporciona integración con CI/CD y herramientas como GitHub Actions, CircleCI y Jenkins. Permite la captura de capturas de pantalla en fallos automáticamente y ofrece plugins para extender funcionalidades (autenticación, componentes, accesibilidad).  </p>|
+| :- | :- | :- | :- |
+
+Para el caso de la integración continua era crucial que todos los integrantes de nuestro equipo siguieran un mismo workflow y este era: 
+
+1. Tras haber finalizado el desarrollo de una feature, el desarrollador debe ejecutar las pruebas automatizadas con Jest de manera local para verificar que no haya regresiones.  
+1. En caso de no existir problemas, se procede a realizar una pull request a la rama de desarrollo, etiquetándola con el formato (#NUMERO\_DE\_LA\_PR) y  añadiendo  los  detalles  necesarios  según  el  estándar  de  Conventional Commits.  
+1. Al llegar la pull request al repositorio remoto, se ejecutan automáticamente los pipelines de GitHub Actions que realizan validación de código con ESLint, comprobación de tipos con TypeScript y las suites de pruebas completas con Jest.  
+4. Si los pipelines son exitosos, la feature pasa a la rama "release" donde se realizan  pruebas  adicionales  de  integración  en  un  entorno  similar  a producción.  
+4. En caso de no detectar ningún problema, se envía una pull request final a la rama main que tras su aprobación despliega automáticamente a producción en Netlify/Railway. De detectarse algún problema, se devuelve a la rama del desarrollador para corrección de bugs e inicio del ciclo nuevamente.  
+2. Build & Test Suite Pipeline Components. 
+
+|<p>**Epic 03: Creación y Gestión de Tutorías**   Como tutor,   </p><p>quiero crear y gestionar mis tutorías en la plataforma  para que los estudiantes puedan verlas.  </p>|
+| :-: |
+|<p>**US01: Publicación de Tutorías**  </p><p>Como tutor,   </p><p>quiero poder crear una publicación de tutoría que incluya el nombre del curso, una breve descripción, costo, disponibilidad, automáticamente una foto representativa de lo que se aprenderá en la tutoría, y la calificación del curso,   </p><p>para atraer estudiantes interesados en mis servicios.  </p>|
+|<p>**Escenario 1: Creación de Publicación de Tutoría**  </p><p>Dado que el tutor está en la página de publicación.  </p><p>Cuando completa los campos requeridos y envía la publicación.  </p><p>Entonces se debe crear una nueva entrada de tutoría en la plataforma con la información proporcionada  </p>|
+|**Prueba con selenium:**  |
+
+
+
+|<p>**Epic 01: Registro y Autenticación de Usuarios**   </p><p>Como usuario,   </p><p>quiero registrarme y acceder a la plataforma de forma segura  para utilizar los servicios disponibles según mi rol (estudiante o tutor).  </p>|
+| - |
+|<p>**US02: Registro de usuario**  </p><p>Como nuevo usuario,   </p><p>quiero registrarme proporcionando información básica   para crear una cuenta en la plataforma.  </p>|
+|<p>**Escenario 1: Registro Exitoso**  </p><p>Dado que un usuario no registrado está en la página de registro.   </p><p>Cuando completa todos los campos requeridos correctamente y envía el formulario  Entonces el sistema crea su nueva cuenta y el sistema envía una confirmación por email.  </p><p>**Escenario 2: Validación de Datos**  </p><p>Dado que un usuario está completando el formulario de registro.   </p><p>Cuando ingresa datos inválidos (email mal formateado, contraseña débil)   Entonces el sistema muestra mensajes de error específicos y no permite completar el registro.  </p>|
+|**Prueba con selenium:**  Escenario 1  |
+
+Escenario 2
+
+
+
+|<p>**Epic 01: Registro y Autenticación de Usuarios**  </p><p>Como usuario,   </p><p>quiero registrarme y acceder a la plataforma de forma segura  para utilizar los servicios disponibles según mi rol (estudiante o tutor).  </p>|
+| - |
+|<p>**US03: Inicio de Sesión**  </p><p>Como usuario,   </p><p>quiero iniciar sesión con mi correo y contraseña   para acceder a mi cuenta.  </p>|
+|<p>**Escenario 1: Inicio de Sesión Exitoso**  </p><p>Dado que un usuario registrado está en la página de inicio de sesión.  Cuando ingresa credenciales correctas.  </p><p>Entonces el usuario accede a su cuenta y es dirigido al dashboard.  </p>|
+|**Prueba con selenium:**  |
+
+
+
+|<p>**Epic 01: Registro y Autenticación de Usuarios**  </p><p>Como usuario,   </p><p>quiero registrarme y acceder a la plataforma de forma segura  para utilizar los servicios disponibles según mi rol (estudiante o tutor).  </p>|
+| - |
+|<p>**US04: Selección de Rol**  </p><p>Como usuario,   </p><p>quiero poder seleccionar mi rol (estudiante o tutor) durante el registro para acceder a las funcionalidades correspondientes  </p><p>para acceder a mi cuenta.  </p>|
+|<p>**Escenario 1: Selección de Rol**  </p><p>Dado que un usuario está completando el registro.    </p><p>Cuando selecciona su rol como "Estudiante" o "Tutor".    </p><p>Entonces esta información se guarda y determina las funcionalidades disponibles.    </p>|
+|**Prueba con selenium:**  |
+
+
+
+|<p>**Epic 01: Registro y Autenticación de Usuarios**  </p><p>Como usuario,   </p><p>quiero registrarme y acceder a la plataforma de forma segura  para utilizar los servicios disponibles según mi rol (estudiante o tutor).  </p>|
+| - |
+|<p>**US05: Recuperación de Contraseña**  </p><p>Como usuario,   </p><p>quiero poder recuperar mi contraseña mediante un enlace enviado a mi correo   para acceder a mi cuenta si la olvido.  </p>|
+|**Escenario 1: Solicitud de Recuperación**   Dado que un usuario olvidó su contraseña.    |
+
+
+
+|Cuando solicita recuperación proporcionando su correo registrado.   Entonces recibe un email con instrucciones.    |
+| :-: |
+|**Prueba con selenium:**  |
+
+
+
+|<p>**Epic 02: Gestión de Perfil de Usuario**  </p><p>Como usuario,   </p><p>quiero gestionar mi perfil   </p><p>para mantener actualizada mi información personal y académica.  </p>|
+| - |
+|<p>**US06: Completar Perfil**  </p><p>Como usuario,   </p><p>quiero completar mi perfil con información personal, académica y una foto   para que otros usuarios me conozcan mejor.  </p>|
+|<p>**Escenario 1: Edición de Perfil**  </p><p>Dado que un usuario está en la sección de perfil.    </p><p>Cuando completa y guarda su información personal y foto.    Entonces estos datos se actualizan y son visibles para otros usuarios.    **Escenario 2: Visualización de Perfil**   </p><p>Dado que un usuario ha completado su perfil.   </p><p>Cuando otro usuario visita su perfil.    </p><p>Entonces puede ver toda la información pública compartida.  </p>|
+|**Prueba con selenium:**  |
+
+
+
+|<p>**Epic 02: Gestión de Perfil de Usuario**  </p><p>Como usuario,   </p><p>quiero gestionar mi perfil   </p><p>para mantener actualizada mi información personal y académica.  </p>|
+| - |
+|<p>**US07: Definir Áreas de Conocimiento**  </p><p>Como tutor,   </p><p>quiero añadir mis áreas de conocimiento y experiencia a mi perfil   para que los estudiantes conozcan mis habilidades.  </p>|
+|<p>**Escenario 1: Agregar Áreas de Conocimiento**  </p><p>Dado que un tutor está editando su perfil.  </p><p>Cuando selecciona y guarda sus áreas de especialización.    </p><p>Entonces estas áreas aparecen en su perfil y se consideran en los filtros de búsqueda.    **Escenario 2: Visualización de Especialidades**   </p><p>Dado que un tutor ha definido sus áreas de conocimiento.    </p><p>Cuando un estudiante visita su perfil.    </p><p>Entonces puede ver claramente las especialidades del tutor.  </p>|
+|**Prueba con selenium:**  |
+
+
+
+|<p>**Epic 03:** **Creación y Gestión de Tutorías**  Como tutor,   </p><p>quiero crear y gestionar mis tutorías en la plataforma   para que los estudiantes puedan verlas.  </p>|
+| :-: |
+|<p>**US08: Crear Tutoría**  </p><p>Como tutor,  </p><p>quiero crear una nueva tutoría especificando materia, horario y descripción   para ofrecerla a los estudiantes.  </p>|
+|<p>**Escenario 1: Creación Exitosa**  </p><p>Dado que un tutor está en la sección de creación de tutorías.    Cuando completa todos los campos requeridos y publica la tutoría.    Entonces la tutoría queda disponible para ser vista por estudiantes.  **Escenario 02: Validación de Datos**  </p><p>Dado que un tutor está creando una tutoría.    </p><p>Cuando ingresa datos inválidos o deja campos obligatorios en blanco.    Entonces recibe alertas de error y no puede publicar hasta corregir.  </p>|
+|<p>**Prueba con selenium:**  </p><p>![](assets/Aspose.Words.3de4385e-63da-4aa8-a439-57957986af96.002.jpeg)</p>|
+
+
+
+|<p>**Epic 03:** **Creación y Gestión de Tutorías**  Como tutor,   </p><p>quiero crear y gestionar mis tutorías en la plataforma   para que los estudiantes puedan verlas.  </p>|
+| :-: |
+|<p>**US09: Listar Tutorías Creadas**  </p><p>Como tutor,   </p><p>quiero ver el listado de todas mis tutorías creadas   para llevar un control de ellas.  </p>|
+|<p>**Escenario 1: Visualización de Listado**  </p><p>Dado que un tutor ha creado varias tutorías.  </p><p>Cuando accede a la sección "Mis Tutorías".  </p><p>Entonces ve un listado organizado con todas sus publicaciones activas.  </p>|
+
+
+
+|<p>**Escenario 2:** **Acciones Sobre el Listado**  </p><p>Dado que un tutor está viendo su lista de tutorías.    Cuando selecciona una tutoría específica.    </p><p>Entonces puede acceder a opciones para editarla o eliminarla.  </p>|
+| - |
+|<p>**Prueba con selenium:**  </p><p>![](assets/Aspose.Words.3de4385e-63da-4aa8-a439-57957986af96.003.jpeg)</p>|
+
+
+
+|<p>**Epic 03:** **Creación y Gestión de Tutorías**  Como tutor,   </p><p>quiero crear y gestionar mis tutorías en la plataforma   para que los estudiantes puedan verlas.  </p>|
+| :-: |
+|<p>**US10: Editar Tutorías Creadas**  Como tutor,   </p><p>quiero editar los detalles de mis tutorías   para mantenerlas actualizadas.  </p>|
+|<p>**Escenario 1:  Actualización de Información**    </p><p>Dado que un tutor selecciona "Editar" en una de sus tutorías.    Cuando modifica la información y guarda los cambios.    Entonces la tutoría se actualiza con los nuevos datos.   **Escenario 2: Cancelación de Edición**  </p><p>Dado que un tutor está editando una tutoría.    Cuando decide cancelar sin guardar los cambios.    Entonces la tutoría mantiene su información original.  </p>|
+|**Prueba con selenium:**  |
+
+![](assets/Aspose.Words.3de4385e-63da-4aa8-a439-57957986af96.004.png)
+
+
+
+|<p>**Epic 03:** **Creación y Gestión de Tutorías**  Como tutor,   </p><p>quiero crear y gestionar mis tutorías en la plataforma   para que los estudiantes puedan verlas.  </p>|
+| :-: |
+|<p>**US11: Eliminar Tutorías Creadas**  Como tutor,   </p><p>quiero eliminar tutorías que ya no voy a ofrecer  para mantener mi catálogo actualizado.  </p>|
+|<p>**Escenario 1: Eliminación Exitosa**  </p><p>Dado que un tutor selecciona "Eliminar" en una de sus tutorías.    Cuando confirma la eliminación.    </p><p>Entonces la tutoría ya no aparece en su listado ni en búsquedas.    **Escenario 2 Confirmación de Eliminación**  </p><p>Dado que un tutor intenta eliminar una tutoría.    </p><p>Cuando el sistema solicita confirmación.    </p><p>Entonces el tutor debe confirmar antes de que se complete la eliminación.  </p>|
+|**Prueba con selenium:**  |
+
+
+
+|<p>**Epic 04: Visualización de Tutorías**  Como estudiante,   </p><p>quiero ver las tutorías disponibles   para encontrar ayuda académica.  </p>|
+| :-: |
+|<p>**US12: Explorar Tutorías**  </p><p>Como estudiante,   </p><p>quiero ver un listado general de tutorías disponibles   para encontrar las que me interesen.  </p>|
+|**Escenario 1: Visualización del Catálogo**   |
+
+
+
+|<p>Dado que un estudiante accede a la sección de tutorías disponibles.  Cuando la página carga.  Entonces ve un listado de todas las tutorías activas con información básica.    **Escenario 2: Paginación**    </p><p>**Dado que hay más tutorías de las que caben en una página.  Cuando el estudiante navega entre páginas.  Entonces puede visualizar todas las tutorías distribuidas en múltiples páginas.**  </p>|
+| :-: |
+|**Prueba con selenium:**  |
+
+
+
+|<p>**Epic 04: Visualización de Tutorías**  Como estudiante,   </p><p>quiero ver las tutorías disponibles   para encontrar ayuda académica.  </p>|
+| :-: |
+|<p>**US13: Ver Detalles de Tutoría**  </p><p>Como estudiante,   </p><p>quiero ver los detalles completos de una tutoría específica   para evaluar si cumple con mis necesidades.  </p>|
+|<p>**Escenario 1: Acceso a Detalles**    </p><p>Dado que un estudiante está explorando tutorías.    </p><p>Cuando hace clic en una tutoría específica.    </p><p>Entonces accede a una página con todos los detalles de esa tutoría.    **Escenario 2: Visualización del Perfil del Tutor**    </p><p>Dado que un estudiante está viendo los detalles de una tutoría.    Cuando hace clic en el nombre o foto del tutor.    </p><p>Entonces puede acceder al perfil completo del tutor.  </p>|
+|**Prueba con selenium:**  |
+
+
+
+|<p>**Epic 05: Solicitud de Tutorías**  Como estudiante,  </p><p>quiero solicitar tutorías  </p><p>para ajustarme a mis necesidades académicas.  </p>|
+| :-: |
+|<p>**US14: Solicitar Tutoría**  Como estudiante,   </p><p>quiero solicitar una tutoría específica   para recibir ayuda académica.  </p>|
+|<p>**Escenario 1: Envío de Solicitud**    </p><p>Dado que un estudiante está viendo los detalles de una tutoría.  Cuando hace clic en "Solicitar" y confirma su interés.  Entonces se envía una notificación al tutor con su solicitud.    </p><p>**Escenario 2: Confirmación de Solicitud**    </p><p>Dado que un estudiante ha enviado una solicitud.  Cuando el sistema procesa la solicitud.  Entonces recibe una confirmación de que su solicitud ha sido enviada.  </p>|
+|**Prueba con selenium:**  |
+
+Además, se realizaron pruebas de rendimiento para el frontend desplegado: 
+
+2. Continuous Delivery 
+
+En  este  apartado  se  puede  encontrar  tres  puntos  principales  a  tomar  en  cuenta:  La automatización  de  pruebas  (pruebas  unitarias,  pruebas  de  integración  y  pruebas funcionales  y  de  aceptación),  el  entorno  de  pruebas  automatizado  y  las  pruebas  de rendimiento  y  carga.  
+
+1. Tools and Practices. 
+
+Se puede emplear distintos tipos de herramientas, por ejemplo: 
+
+Jest: Framework principal de pruebas para nuestro backend NestJS, ofrece aserciones incorporadas, capacidades de mock y reportes de cobertura de código con excelente soporte para TypeScript. Implementamos una convención de nomenclatura consistente (nombreMétodo\_DadaCondición\_DeberíaResultadoEsperado) para pruebas descriptivas y mantenibles. 
+
+Supertest: Herramienta complementaria para pruebas de integración de API, permite realizar solicitudes HTTP simuladas y validar completamente las respuestas, incluyendo códigos de estado y estructura de datos. 
+
+GitHub Actions: Sistema de CI/CD que ejecuta automáticamente validaciones en cada pull request, incluyendo linting con ESLint, verificación de tipos con TypeScript y la suite completa de pruebas unitarias e integración. 
+
+**Render**: Tu camino más rápido a producción. Crea, implementa y escala tus aplicaciones con una facilidad inigualable, desde tu primer usuario hasta el billonésimo. 
+
+ESLint: Herramienta de análisis estático que aplica estándares de codificación con reglas personalizadas para aplicaciones NestJS, cubriendo patrones específicos de TypeScript, mejores prácticas de seguridad y convenciones del framework. 
+
+TypeScript: Lenguaje de programación tipado que garantiza una comprobación estricta de tipos, con una configuración que incluye aliases de ruta para importaciones limpias y soporte para metadatos de decoradores necesarios para la inyección de dependencias de NestJS. 
+
+![](assets/Aspose.Words.3de4385e-63da-4aa8-a439-57957986af96.005.png)
+
+TypeORM: Gestiona cambios en la base de datos mediante migraciones con control de versiones, proporcionando un sistema consistente para la evolución del esquema de datos y generación de datos de prueba. 
+
+![](assets/Aspose.Words.3de4385e-63da-4aa8-a439-57957986af96.006.png)
+
+2. Stages Deployment Pipeline Components. 
+
+A continuación, se describen las etapas del pipeline de despliegue implementado en el proyecto TutorMatch Backend. Cada etapa está diseñada para garantizar una entrega continua y efectiva del software. 
+
+1. **Code Commit**: Se inicia cuando un desarrollador realiza un commit en el repositorio de código. Los commits siguen la convención de Conventional Commits para mantener una estructura clara en los mensajes. La herramienta utilizada es Git con GitHub como plataforma de alojamiento del repositorio.  
+1. **Linting y Verificación de Tipos**: En esta fase, se ejecutan herramientas de análisis estático de código como ESLint para validar la calidad del código y TypeScript para verificar la correcta tipificación. Esto asegura que el código sea robusto y cumpla con los estándares establecidos antes de continuar con el proceso.  
+1. **Build**: El código se compila utilizando el compilador de TypeScript y NestJS CLI para generar los artefactos necesarios para la ejecución. Este proceso verifica que no existan errores de compilación y prepara la aplicación para las pruebas y el despliegue.  
+1. **Test Unitarios**: Se ejecutan pruebas unitarias con Jest para verificar el funcionamiento de componentes individuales como servicios y repositorios. Estas pruebas validan que cada unidad de código funcione correctamente de manera aislada.  
+1. **Test de Integración**: Se utilizan pruebas de integración con Supertest y Jest para validar la interacción entre diferentes componentes del sistema, como controladores, servicios y repositorios. Estas pruebas aseguran que los componentes funcionen correctamente cuando se integran.  
+1. **Análisis de Cobertura**: Se genera un informe de cobertura de código utilizando las capacidades integradas de Jest para medir qué porcentaje del código está cubierto por pruebas. Esto ayuda a identificar áreas que requieren pruebas adicionales.  
+7. **Staging**: La aplicación se despliega en el entorno de staging en Railway, donde se realizan pruebas adicionales en un ambiente similar a producción. Se verifica la interacción con servicios externos como Supabase (base de datos y almacenamiento).  
+7. **Production Release**: Tras la aprobación en el entorno de staging, la aplicación se despliega en el entorno de producción en Railway. Este despliegue se realiza automáticamente después de la incorporación de cambios en la rama principal tras una revisión de código exitosa.  
+7. **Monitoreo Post-Despliegue**: Una vez desplegada, la aplicación es monitoreada para verificar su correcto funcionamiento y rendimiento. Se utilizan herramientas como Winston para registro estructurado y Sentry para seguimiento de errores, permitiendo una respuesta rápida a posibles problemas.  
+3. Continuous deployment 
+
+El despliegue continuo es una práctica fundamental en el desarrollo de software moderno, que automatiza la entrega de cambios al entorno de producción. En esta sección se describen las herramientas y procesos implementados para asegurar un flujo de trabajo eficiente, permitiendo que el software sea desplegado de manera rápida, segura y consistente. 
+
+1. Tools and Practices. 
+
+**GitHub Actions**: Es el motor principal de automatización de CI/CD en nuestro proyecto TutorMatch Backend. Configuramos flujos de trabajo que se activan con cada push o pull request, ejecutando una serie de validaciones como linting con ESLint, verificación estática de tipos con TypeScript, pruebas unitarias con Jest, y pruebas de integración con Supertest. Si todas las verificaciones son exitosas, se procede al despliegue automático en Railway. 
+
+![](assets/Aspose.Words.3de4385e-63da-4aa8-a439-57957986af96.007.png)
+
+**Render**: Tu camino más rápido a producción. Crea, implementa y escala tus aplicaciones con una facilidad inigualable, desde tu primer usuario hasta el billonésimo. 
+
+![](assets/Aspose.Words.3de4385e-63da-4aa8-a439-57957986af96.008.png)
+
+**ESLint + Prettier**: Herramientas integradas en nuestro pipeline para garantizar la calidad y consistencia del código. ESLint aplica reglas específicas para TypeScript y NestJS, mientras que Prettier asegura un formato uniforme según la configuración definida en nuestro proyecto, como el uso de comillas simples y trailing commas. 
+
+![](assets/Aspose.Words.3de4385e-63da-4aa8-a439-57957986af96.009.png)
+
+2. Production Deployment Pipeline Components. 
+
+**Despliegue en Render y Netlify:** 
+
+- Render: Utilizamos Render para el despliegue del backend, porque permite una integración sencilla con GitHub, ofrece despliegue automático continuo, soporte  para  variables  de  entorno,  escalado  automático  y  un  entorno  de producción  con  dominio  personalizado,  todo  sin  necesidad  de  gestionar infraestructura manualmente.  
+- Netlify: Utilizamos Netlify para el despliegue del backend, porque permite una configuración rápida mediante integración con Git, despliegue continuo con cada push, gestión sencilla de variables de entorno, funciones serverless para lógica del backend, y ofrece HTTPS automático, lo que facilita tener un entorno de producción sin complicaciones.  
+
+**Pruebas Unitarias y de Integración:** 
+
+- Pruebas Continuas: Mantenemos un enfoque riguroso en la ejecución de pruebas automatizadas utilizando herramientas como Cucumber para pruebas de aceptación basadas  en criterios de negocio,  Selenium para pruebas de interfaz de usuario, y Vitest para pruebas unitarias en entornos JavaScript. Esto nos permite validar las funcionalidades clave antes de cada despliegue.  
+- Cobertura de Pruebas: Utilizamos herramientas como Vitest y reportes de cobertura integrados para asegurar que el código esté adecuadamente probado. Además, empleamos Lighthouse para auditar el rendimiento, la accesibilidad y las mejores prácticas en la aplicación, minimizando riesgos y asegurando calidad en producción.  
+
+El proceso de despliegue en producción de la aplicación se gestiona mediante un pipeline automatizado que utiliza Render como plataforma de alojamiento del backend. Este flujo permite implementar de manera continua y eficiente los cambios aprobados en la rama principal del repositorio, garantizando una integración fluida entre el código fuente, los servicios desplegados y los entornos de producción. En la siguiente imagen se puede observar cómo Render se integra dentro del pipeline de despliegue para proporcionar un entorno  de  backend  estable  y  escalable,  facilitando  la  entrega  continua  de  nuevas funcionalidades a los usuarios finales. 
+
+![](assets/Aspose.Words.3de4385e-63da-4aa8-a439-57957986af96.010.jpeg)
+
+Además,  para  garantizar  la  calidad  del  software  y  validar  el  cumplimiento  de  los requisitos funcionales definidos en el product backlog, se han implementado pruebas automatizadas utilizando Selenium. Estas pruebas simulan la interacción del usuario con la  aplicación  y  están  alineadas  con  las  historias  de  usuario  priorizadas  durante  el desarrollo. A través de este enfoque, se verifica que cada funcionalidad implementada responde  correctamente  a  los  criterios  de  aceptación  establecidos  por  el  equipo  de producto. La siguiente imagen ilustra la ejecución de un conjunto de tests automatizados en Selenium, enfocados en validar escenarios clave definidos por las historias de usuario, como parte del proceso de aseguramiento de calidad previo al despliegue. 
+
+![](assets/Aspose.Words.3de4385e-63da-4aa8-a439-57957986af96.011.jpeg)
+
+El despliegue del frontend de la aplicación se realiza mediante la plataforma Netlify, la cual permite una entrega continua y automatizada de la interfaz de usuario hacia producción. Gracias a su integración directa con sistemas de control de versiones como Git, Netlify detecta automáticamente los cambios realizados en la rama principal y ejecuta procesos de construcción y despliegue sin intervención manual. Esta estrategia facilita la disponibilidad inmediata de nuevas características visuales y mejoras en la experiencia del usuario. En la siguiente imagen se muestra cómo Netlify gestiona el pipeline de despliegue del frontend, incluyendo la detección de cambios, el build estático de los recursos, y su posterior publicación en un entorno seguro y escalable. 
+
+![](assets/Aspose.Words.3de4385e-63da-4aa8-a439-57957986af96.012.jpeg)
+
+4. Continuous Monitoring  
+
+El monitoreo continuo es el proceso de supervisar en tiempo real el comportamiento y rendimiento de una aplicación en producción para detectar y responder rápidamente a errores, fallos o anomalías que puedan afectar su funcionamiento.  
+
+1. Tools and Practices  
+
+Para implementar un **monitoreo continuo efectivo** en una aplicación, es fundamental aplicar un conjunto de herramientas y buenas prácticas. A continuación, se detallan las principales: 
+
+1. Herramientas de monitoreo:  
+
+Se utilizan plataformas especializadas para recopilar datos sobre el rendimiento de la aplicación y la infraestructura. Algunas de las herramientas más populares incluyen: 
+
+- Prometheus y Grafana para métricas en tiempo real.  
+- ELK Stack (Elasticsearch, Logstash y Kibana) para gestión y visualización de logs.  
+- New Relic y Datadog como soluciones completas de monitoreo de aplicaciones (APM).  
+- Sematext para combinar monitoreo de rendimiento, análisis de logs e infraestructura.  
+
+Para esta propuesta se utilizará Sematext debido a que ofrece una solución integral que combina monitoreo de aplicaciones, análisis de logs y supervisión de infraestructura en una sola plataforma. Además, permite la visualización en tiempo real de métricas clave, y facilita la detección de problemas gracias a sus paneles interactivos y alertas configurables. 
+
+![](assets/Aspose.Words.3de4385e-63da-4aa8-a439-57957986af96.013.jpeg)
+
+2. Métricas clave:  
+
+Es esencial identificar y monitorear métricas relevantes, como: 
+
+- Tiempo de respuesta en ms  
+- Tasa de errores  
+- Disponibilidad del sistema  
+- Volumen de tráfico (tamaño de la transacción)  
+
+![](assets/Aspose.Words.3de4385e-63da-4aa8-a439-57957986af96.014.jpeg)
+
+3. Registros (Logging):  
+
+Implementar sistemas de registro que capturen eventos y logs de la aplicación permite detectar anomalías y facilita la depuración de errores. 
+
+4. Monitorización de la infraestructura:  
+
+Además de la aplicación, es importante supervisar la infraestructura subyacente: 
+
+- Servidores  
+- Bases de datos  
+- Servicios de red y componentes del sistema operativo  
+2. Monitoring Pipeline Components  
+
+Un pipeline de monitoreo continuo está compuesto por varias etapas que permiten 
+
+observar, analizar y actuar sobre el comportamiento del sistema en tiempo real. Las principales etapas son: 
+
+- **Recopilación de datos (Data Collection)**  
+
+Las herramientas de monitoreo obtienen datos desde diversas fuentes como la aplicación, la infraestructura, los registros y los servicios asociados.  
+
+- **Almacenamiento de datos (Data Storage):**  
+
+La información recopilada se guarda en sistemas de almacenamiento adecuados, como bases de datos de series temporales (ej. InfluxDB, Prometheus) o plataformas de búsqueda (ej. Elasticsearch), para permitir su posterior análisis y visualización.  
+
+3. Alerting Pipeline Components  
+
+El pipeline de alertas es una parte esencial del monitoreo continuo, ya que permite detectar y notificar automáticamente sobre eventos anómalos o críticos que puedan afectar el funcionamiento de una aplicación o infraestructura. 
+
+![](assets/Aspose.Words.3de4385e-63da-4aa8-a439-57957986af96.015.jpeg)
+
+4. Notification Pipeline Components  
+
+El pipeline de notificaciones es responsable de entregar las alertas generadas por el sistema de monitoreo a los destinatarios adecuados, lo cual es vital para garantizar que los equipos responsables sean informados de manera oportuna y efectiva. Este pipeline se compone de los siguientes elementos clave: 
+
+1. Canal de comunicación (Communication Channel):  
+
+Las notificaciones pueden enviarse a través de múltiples canales, dependiendo de la criticidad del evento y la preferencia del equipo. Algunos canales comunes incluyen: 
+
+- Correo electrónico  
+- SMS  
+2. Formato del mensaje (Message Formatting):  
+
+El contenido de la notificación debe ser claro, conciso y contener la información necesaria para tomar decisiones rápidas. Esto incluye: 
+
+- Descripción del evento o alerta  
+- Nivel de severidad  
+- Fuente o componente afectado  
+- Enlaces a dashboards o logs relevantes  
+- Recomendaciones o acciones sugeridas  
+
+![](assets/Aspose.Words.3de4385e-63da-4aa8-a439-57957986af96.016.jpeg)
+
+
 **Capítulo VIII: Experiment-Driven Development**  
 
 1. Experiment Planning 
