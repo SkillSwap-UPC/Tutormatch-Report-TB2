@@ -4,7 +4,7 @@
 
 **INFORME DE TRABAJO FINAL** 
 
-` `Diseño de Experimentos de Ingeniería de Software – NRC: 4453 Carrera de Ingeniería de Software – 7to ciclo 
+Diseño de Experimentos de Ingeniería de Software – NRC: 4453 Carrera de Ingeniería de Software – 7to ciclo 
 
 Docente: Julio Manuel Noriega Melendez 
 
@@ -34,8 +34,10 @@ Nombre del producto: TutorMatch
 |1\.3 |16/04/2025 |SkillSwapInc |Capítulo III |
 |1\.4 |18/04/2025 |SkillSwapInc |Capítulo IV |
 |1\.5 |22/04/2025 |SkillSwapInc |Capítulo V |
-|2\.1 |09/05/2025 |SkillSwapInc |Capítulo VI |
-|2\.2 |14/05/2025 |SkillSwapInc |Capítulo VII |
+|2\.0 |09/05/2025 |SkillSwapInc |Capítulo VI |
+|2\.1 |14/05/2025 |SkillSwapInc |Capítulo VII |
+|2\.2 |16/07/2025 |SkillSwapInc |Capítulo VI<br/>Capítulo VII<br/>Capítulo VIII  |
+
 
 **Contenido** 
 
