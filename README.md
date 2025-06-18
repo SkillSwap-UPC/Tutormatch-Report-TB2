@@ -3503,7 +3503,7 @@ Mediante sesiones cronometradas simuladas (con Selenium o pruebas moderadas).
 |<p>**What**  </p><p>¿Qué canal de contacto prefieren los estudiantes al solicitar tutorías?  </p><p>**Why**  </p><p>Para optimizar la interfaz priorizando el canal preferido.  </p>|
 
 
-**When**  ![](assets/Aspose.Words.f18970b1-5a23-40e9-8dd8-832170fe4b16.005.png)
+**When**  
 
 En el paso final de solicitud de tutoría.  
 
