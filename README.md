@@ -3302,6 +3302,580 @@ El despliegue del frontend de la aplicación se realiza mediante la plataforma N
 
 ![](assets/Aspose.Words.3512cffb-c000-4760-a8ee-a98d826675de.200.jpeg)
 
+
+**Capítulo VIII: Experiment-Driven Development**  
+
+1. Experiment Planning 
+
+Esta sección establece las bases para la experimentación sistemática dentro del desarrollo de productos y servicios. Su objetivo es definir el estado actual del problema, formular preguntas clave, identificar lagunas de conocimiento y establecer un marco estructurado para diseñar pruebas de software. 
+
+1. As-Is Summary Segmento: Alumnos 
+
+![](assets/Aspose.Words.f18970b1-5a23-40e9-8dd8-832170fe4b16.001.jpeg)
+
+Este modelo describe el flujo de experiencia de los estudiantes cuando buscan tutorías, dividido en cuatro fases clave: preocupación por la dificultad de algunos cursos, reservar asesoría, entrar a la sesión y experiencia con el tutor. 
+
+1. **Preocupación inicial**: Los alumnos detectan bajo rendimiento en ciertos cursos y, tras intentar estudiar por su cuenta sin éxito, consideran buscar ayuda de un tutor.  
+1. **Reserva de asesoría:** Exploran opciones en la plataforma, revisan reseñas de profesores y eligen un horario disponible.  
+1. **Sesión de tutoría:** Se conectan con el tutor, reciben explicaciones sobre temas complejos, hacen preguntas y participan activamente.  
+1. **Experiencia post-sesión:** Experimentan sentimientos de satisfacción y confianza si la sesión fue útil, aunque algunos pueden sentir desconfianza inicial antes de conocer al tutor.  
+
+En resumen, el proceso de tutoría es una experiencia dinámica en la que los alumnos atraviesan distintas etapas emocionales y cognitivas. Desde la preocupación inicial hasta la  satisfacción  posterior,  cada  fase  está  moldeada  por  la  calidad  del  servicio,  la accesibilidad de la plataforma y la confianza en el tutor. Optimizar la interfaz, mejorar la selección de profesores y garantizar experiencias de aprendizaje efectivas puede reforzar la confianza de los estudiantes y convertir la tutoría en un recurso clave para su éxito académico. 
+
+Segmento: Profesores 
+
+![](assets/Aspose.Words.f18970b1-5a23-40e9-8dd8-832170fe4b16.002.jpeg)
+
+Este modelo describe el flujo del tutor cuando busca dar clases en línea, dividido en cinco fases: búsqueda de plataformas, espera de alumnos, inicio de la sesión, enseñanza efectiva y experiencia con la plataforma web. 
+
+1. **Búsqueda de plataformas**: El tutor explora opciones en línea para ofrecer sus servicios, sintiendo entusiasmo por nuevas oportunidades pero también dudas sobre la existencia de plataformas adecuadas.  
+1. **Espera de alumnos**: Se adapta a la plataforma y a los horarios de los alumnos, lo que genera incertidumbre sobre si podrá encontrar interesados en sus clases.  
+1. **Inicio de la sesión**: Se conecta para enseñar, enfrentando desafíos como la adaptación a la interfaz y la falta de guías accesibles.  
+1. **Enseñanza efectiva**: Explica de forma clara, interactúa con los alumnos y experimenta satisfacción cuando sus clases son valoradas.  
+1. **Experiencia con la plataforma web**: Evalúa la interfaz y las herramientas disponibles,  sintiendo  cierta  preocupación  por  la  falta  de  recursos  que optimicen la enseñanza.  
+
+En  resumen,  el  tutor  atraviesa  un  proceso  que  combina  expectativas,  adaptación  y enseñanza.  Desde  la  emoción  inicial  al  descubrir  nuevas  oportunidades,  hasta  la incertidumbre de atraer alumnos y la necesidad de dominar la plataforma, cada fase influye en su experiencia. La calidad de sus clases y la interacción con los estudiantes determinan  su  satisfacción,  mientras  que  la  eficiencia  de  la  plataforma  impacta  su confianza y continuidad en el sistema. Optimizar herramientas de enseñanza y mejorar la experiencia de conexión pueden potenciar su desempeño y fortalecer su compromiso con la comunidad educativa. 
+
+2. Raw Material: Assumptions, Knowledge Gaps, Ideas, Claims 
+1. Assumptions (Suposiciones) 
+- Se asume que los estudiantes cuentan con su correo institucional para registrarse, considerando este medio más seguro y confiable.  
+- **Justificación:** El uso del correo institucional garantiza que los usuarios estén vinculados a una institución educativa formal, lo que valida su identidad académica y mejora la seguridad del ecosistema.  
+- **Enfoque tecnológico:** Se implementa una autenticación mediante verificación de dominio (ejemplo: @upc.edu) que restringe el registro solo a direcciones válidas de la institución.  
+- Se  considera  que  los  usuarios  están  dispuestos  a  leer  y  aceptar  el reglamento de uso al momento de crear su cuenta en la plataforma.  
+- **Justificación:** En plataformas que gestionan interacciones entre personas (como tutorías pagadas), es fundamental que los usuarios comprendan sus derechos y responsabilidades desde el inicio.  
+- **Enfoque tecnológico:** Se integra un paso obligatorio en el registro que presenta el reglamento en una vista accesible, con la opción de aceptación mediante un botón antes de continuar.  
+- Se asume que la organización de las tutorías por curso y ciclo académico facilita la búsqueda y selección de sesiones de apoyo académico.  
+- **Justificación:** La agrupación por criterios académicos reduce el tiempo de búsqueda y mejora la relevancia de las opciones mostradas al estudiante.  
+- **Enfoque tecnológico:** El dashboard de tutorías cuenta con filtros por curso y ciclo, además de una arquitectura de datos que asocia cada tutoría a su categoría respectiva para una recuperación rápida.  
+- Se cree que la mayoría de usuarios (tanto tutores como estudiantes) están familiarizados y conformes con el uso de WhatsApp o correo electrónico como medios de contacto para coordinar tutorías.  
+- **Justificación:**  Estas  son  las  plataformas  de  comunicación  más utilizadas en el entorno educativo informal, lo que las convierte en herramientas convenientes para coordinación directa.  
+- **Enfoque tecnológico:** Los botones de contacto redireccionan al número de WhatsApp o al correo institucional registrado del tutor, usando enlaces dinámicos.  
+- Se  presupone  que  la  coordinación  de  pagos  de  manera  externa  a  la plataforma no representa una barrera significativa para la concretación de una tutoría.  
+- **Justificación:** Dado que el reglamento informa explícitamente que los pagos son gestionados entre tutor y estudiante, se espera que la mayoría acepte este modelo sin inconvenientes.  
+- **Enfoque tecnológico:** No se integran pasarelas de pago, pero se resalta en la interfaz que los detalles de pago se acuerdan directamente, conforme al acuerdo de uso.  
+2. Knowledge Gaps (Brechas de Conocimiento) 
+- ¿Los  estudiantes  comprenden  completamente  el  funcionamiento  del reglamento de usuario y sus implicancias legales o operativas?  
+- **Justificación:** Aunque los estudiantes deben aceptar el reglamento al registrarse, no está claro si realmente lo leen o entienden los alcances sobre responsabilidades, coordinación  de pagos externos y uso de medios de contacto. Esto puede generar conflictos o malentendidos en el uso de la plataforma.  
+- **Enfoque  tecnológico:**  Se  puede  incorporar  una  validación  de lectura más interactiva (ejemplo: Botones de aceptación de cláusulas clave o resumen ilustrado del reglamento) antes de finalizar el registro. También puede incluirse una sección de preguntas frecuentes accesible desde el dashboard.  
+- ¿Qué grado de confianza tienen los estudiantes al realizar pagos fuera de la plataforma?  
+- **Justificación:**  Los  pagos  externos  pueden  percibirse  como inseguros  o  poco  transparentes.  Si  bien  el  reglamento  aclara  esta mecánica, no se sabe si los estudiantes se sienten protegidos o si esto disuade su uso de la plataforma.  
+- **Enfoque  tecnológico:**  Encuestas  o  formularios  de retroalimentación después de intentos de contacto, preguntando si la tutoría fue pagada, si surgieron inconvenientes o si habría preferencia por un sistema seguro de pago integrado.  
+- ¿Existen posibles problemas de usabilidad en el dashboard, el perfil del usuario o la sección de detalles de cada tutoría?  
+- **Justificación:**  Sin  pruebas  con  usuarios  reales,  no  es  posible determinar si la navegación, los botones o el contenido son realmente intuitivos  y  útiles.  Problemas  de  usabilidad  pueden  afectar  la conversión y permanencia en la plataforma.  
+- **Enfoque tecnológico:** Realizar pruebas de usabilidad end to end con estudiantes y tutores para observar puntos de fricción.  
+3. Ideas 
+- Agregar una funcionalidad de valoraciones y comentarios para cada tutor, permitiendo retroalimentación de los estudiantes.  
+- **Justificación:**  Las  reseñas  permiten  a  otros  estudiantes  tomar decisiones más informadas y promueven la mejora continua de los tutores. Además, añade un componente de confianza y transparencia al sistema.  
+- **Enfoque  tecnológico:**  Diseñar  un  sistema  de  puntuación  con comentarios que esté vinculado a la base de datos del sistema. Se puede implementar lógica para permitir reseñas a una tutoría solo después de que se haya confirmado como tutoría finalizada.  
+4. Claims (Afirmaciones) 
+- La  organización  de  las  tutorías  por  ciclo  académico  permite  a  los estudiantes encontrar con mayor rapidez el apoyo que necesitan en sus cursos.  
+- **Justificación:**  La  categorización  por  ciclo  simplifica  la navegación, evitando que los estudiantes tengan que revisar sesiones que no se alinean con su avance académico.  
+- **Enfoque tecnológico:** Uso de filtros predefinidos y etiquetas por ciclo en el backend (ej. ciclo 1–10) que se integren en el buscador de tutorías del dashboard con UX optimizado (menús desplegables, chips 
+- cards filtrables).  
+- La  plataforma  comunica  claramente  que  los  pagos  no  se  gestionan internamente,  en  cumplimiento  con  el  reglamento,  y  que  deben  ser coordinados directamente entre tutor y estudiante.  
+- **Justificación:** Esto asegura transparencia y alinea la funcionalidad de la plataforma con el marco legal y técnico previamente establecido, evitando responsabilidades indebidas.  
+- **Enfoque tecnológico:** Mensajes visibles en la interfaz de usuario (tanto en la solicitud de tutoría como en el reglamento aceptado al registrarse), con tooltips o cuadros informativos cuando se visualiza la tutoría.  
+- La visualización clara de los detalles de las tutorías (precio, horarios, tutor, curso) ayuda a los estudiantes a tomar decisiones informadas al solicitar una sesión.  
+- **Justificación:**  Los  estudiantes  pueden  comparar  opciones fácilmente sin necesidad de contactar previamente al tutor, lo cual mejora la experiencia y reduce fricciones.  
+- **Enfoque tecnológico:** Componentes UI como cards informativas 
+- fichas detalladas con layout jerárquico: curso > tutor > horario > modalidad > precio. Asegurar legibilidad con buen diseño responsive y etiquetas destacadas.  
+3. Experiment-Ready Questions 
+
+Esta sección corresponde a preguntas listas para ser ejecutadas en un experimento, las cuales serán afinadas al utilizar la técnica de 5WS y H. 
+
+EP01 - Registro y Autenticación de Usuarios 
+
+Objetivo: Validar que los usuarios se registran fácilmente y entienden las medidas de autenticación. 
+
+1. ¿Los usuarios completan el proceso de registro sin necesidad de asistencia adicional?  
+
+|The Five WS and One H  |
+| - |
+|<p>**What**  </p><p>¿Qué porcentaje de usuarios completa el registro sin errores ni abandono?  </p><p>**How**  </p><p>Simulaciones automatizadas con Selenium o test moderados; registrar tasa de finalización exitosa y número de errores en logs o capturas de pantalla.    </p>|
+
+2. ¿El  uso  del  correo  institucional  como  único  medio  de  registro  es comprendido y aceptado sin confusión?  
+
+|The Five WS and One H  |
+| - |
+|<p>**What**  </p><p>¿Qué porcentaje de usuarios completa el campo de correo institucional correctamente en el primer intento?  </p>|
+
+**How**  ![ref1]
+
+Mediante validación de formularios y conteo de errores registrados en consola o backend.    
+
+3. ¿El mensaje del reglamento de usuario es leído y comprendido antes de continuar con el registro?  
+
+|The Five WS and One H  |
+| - |
+|<p>**What**  </p><p>Qué porcentaje de usuarios realiza scroll completo y acepta el reglamento antes de continuar?  </p><p>**How**  </p><p>Uso de herramientas como Hotjar o Clarity para capturar eventos de scroll y clic en “aceptar” (scroll depth + click tracking).    </p>|
+
+4. ¿Los estudiantes y tutores logran identificarse correctamente según su rol durante el registro?  
+
+|The Five WS and One H  |
+| - |
+|<p>**What**  </p><p>¿Qué porcentaje de usuarios elige correctamente su rol según los datos ingresados?  </p><p>**How**  </p><p>Verificación automática en base de datos luego de simulaciones con perfiles diferenciados. (Por ejemplo: 10 estudiantes simulados → 10 deben tener el rol “estudiante” en la BD).    </p>|
+
+EP02 - Gestión de Perfil de Usuario 
+
+Objetivo: Validar que los usuarios entienden cómo gestionar y actualizar su perfil. 
+
+5. ¿Los  usuarios  encuentran  fácilmente  la  opción  para  editar  su  perfil académico y personal?  
+
+|The Five WS and One H  |
+| - |
+|<p>**What**  </p><p>¿Qué porcentaje de usuarios accede a la edición de perfil en menos de 30 segundos desde el dashboard?  </p><p>**How**  </p><p>Tracking de tiempo desde login hasta primer clic en “Editar perfil” (eventos temporales con Firebase Analytics).  </p>|
+
+6. ¿Los tutores entienden qué información de su perfil es visible para los estudiantes?  
+
+|The Five WS and One H  |
+| - |
+|<p>**What**  </p><p>¿Qué porcentaje de tutores identifica correctamente qué campos son visibles para estudiantes?  </p><p>**How**  Entrevistas de validación    </p>|
+
+
+7. ¿Los  usuarios  sienten  que  el  perfil  es  suficientemente  completo  para representar su identidad académica?  
+
+|The Five WS and One H  |
+| - |
+|<p>**What**  </p><p>¿Qué campos del perfil son más actualizados por los usuarios activos cada mes? </p><p>**How**  </p><p>Query mensual en base de datos: contar campos editados por usuario (updated\_at) y clasificarlos por tipo (ciclo, carrera, contacto, etc.).    </p>|
+
+8. ¿Con qué frecuencia los usuarios actualizan información clave como ciclo, carrera o datos de contacto?  
+
+|The Five WS and One H  |
+| - |
+|<p>**What**  </p><p>¿Qué porcentaje de tutores crea una tutoría en menos de 90 segundos y con menos de 2 errores de validación?  </p><p>**How**  </p><p>Simulaciones automatizadas cronometradas (Selenium + Redline13) y conteo de errores a nivel frontend/backend.    </p>|
+
+EP03 - Creación y Gestión de Tutorías 
+
+Objetivo: Asegurar que los tutores puedan crear y administrar sus tutorías sin dificultad. 
+
+9. ¿Los tutores comprenden rápidamente cómo crear una nueva tutoría desde su panel?  
+
+|The Five WS and One H  |
+| - |
+|<p>**What**  </p><p>¿Qué campos generan más errores de validación al crear o editar una tutoría?  </p><p>**How**  </p><p>Registro de logs del frontend  </p>|
+
+10. ¿Qué porcentaje de tutores edita o actualiza al menos una vez sus tutorías luego de publicarlas?  
+
+|The Five WS and One H  |
+| - |
+|<p>**What**  </p><p>¿Qué porcentaje de tutores edita una tutoría al menos una vez después de publicarla?  </p><p>**How**  </p><p>Análisis de auditoría de tutorías (updated\_at > created\_at) por tutor en base de datos luego de 1 mes.  </p>|
+
+EP04 - Visualización y Solicitud de Tutorías 
+
+Objetivo: Validar que los estudiantes pueden buscar y solicitar tutorías de forma eficaz. 
+
+11. ¿Los estudiantes encuentran en menos de 2 minutos una tutoría que se ajuste a su curso y ciclo?  ![](assets/Aspose.Words.f18970b1-5a23-40e9-8dd8-832170fe4b16.004.png)
+
+The Five WS and One H  
+
+¿Qué tan rápido encuentran una tutoría?  
+
+**Why**  
+
+Para validar la eficiencia de la búsqueda y la relevancia del contenido mostrado.  
+
+**When**  
+
+Desde el login hasta el clic en "Solicitar tutoría".  
+
+**Where**  
+
+En la vista de búsqueda de tutorías del dashboard estudiantil.  
+
+**Who**  
+
+Estudiantes que simulan una sesión completa desde el inicio.  
+
+**How**  
+
+Mediante sesiones cronometradas simuladas (con Selenium o pruebas moderadas).  
+
+12. ¿Los filtros y organización por ciclo o curso son suficientes para ayudar en la búsqueda?  
+
+|The Five WS and One H  |
+| - |
+|<p>**What**  </p><p>¿Qué tan útiles son los filtros disponibles?  </p><p>**Why**  </p><p>Para evaluar si los filtros facilitan encontrar contenido relevante.  </p><p>**When**  </p><p>Durante la navegación en la vista de búsqueda de tutorías.  </p><p>**Where**  </p><p>En la sección de buscador de tutorías (barra lateral o superior).  </p><p>**Who**  </p><p>Estudiantes que realizan búsquedas activamente.  </p><p>**How**  Entrevistas de validación  </p>|
+
+13. ¿Los estudiantes tienen preferencia clara entre contacto por WhatsApp o correo electrónico para solicitar tutorías?  
+
+|The Five WS and One H  |
+| - |
+|<p>**What**  </p><p>¿Qué canal de contacto prefieren los estudiantes al solicitar tutorías?  </p><p>**Why**  </p><p>Para optimizar la interfaz priorizando el canal preferido.  </p>|
+
+
+**When**  ![](assets/Aspose.Words.f18970b1-5a23-40e9-8dd8-832170fe4b16.005.png)
+
+En el paso final de solicitud de tutoría.  
+
+**Where**  
+
+En el detalle de la tutoría, donde están los botones de contacto.  
+
+**Who**  
+
+Estudiantes listos para contactar al tutor.  
+
+**How**  
+
+Registro de clics en botones (WhatsApp vs. Correo) + encuesta de preferencia.  
+
+EP05 - Acuerdos y Soporte Técnico 
+
+Objetivo: Validar que los usuarios comprenden el reglamento y saben cómo acceder al soporte. 
+
+14. ¿Los  usuarios  saben  cómo  acceder  al  reglamento  y  lo  consultan  ante dudas?  
+
+|The Five WS and One H  |
+| - |
+|<p>**What**  </p><p>¿Los usuarios identifican correctamente la ubicación del reglamento y acceden a él cuando lo necesitan?  </p><p>**Why**  </p><p>Para garantizar que los usuarios comprendan las condiciones de uso y consulten el reglamento sin fricción cuando tengan dudas.  </p><p>**When**  </p><p>Durante el registro, antes de publicar o solicitar una tutoría, o al enfrentar situaciones problemáticas.  </p><p>**Where**  </p><p>En secciones clave de la plataforma como el registro, el perfil o el centro de ayuda (footer, enlaces contextuales, etc.).  </p><p>**Who**  </p><p>Todos los usuarios registrados: tutores y estudiantes.  </p><p>**How**  </p><p>Mediante tracking de clics en enlaces al reglamento (eventos de clic), encuesta post-uso (pregunta cerrada: "¿Dónde consultarías el reglamento?")   </p>|
+
+15. ¿Con qué frecuencia los usuarios solicitan ayuda técnica para resolver problemas de uso?  
+
+|The Five WS and One H  |
+| - |
+|<p>**What**  </p><p>Frecuencia con la que los usuarios acuden al soporte técnico ante fallos, errores </p><p>o dudas funcionales.  </p>|
+
+Para entender cuán intuitiva es la plataforma y si existen puntos de fricción o fallas frecuentes.  
+
+**When**  
+
+En cualquier momento en que experimenten problemas o dudas, especialmente al registrar, editar o interactuar con tutorías.  
+
+**Where**  
+
+Desde secciones como el centro de ayuda, perfil de usuario, formulario de contacto o mensajes emergentes.  
+
+**Who**  
+
+Usuarios activos, especialmente durante sus primeras interacciones.  
+
+**How**  
+
+Mediante conteo de envíos de formularios de soporte, correos o mensajes internos en la plataforma durante un periodo determinado (por semana o mes).  
+
+EP06 - Gestión de Reseñas de Tutorías 
+
+Objetivo: Medir la utilidad percibida y la frecuencia de uso del sistema de reseñas. 
+
+16. ¿Los usuarios consideran útil leer comentarios y valoraciones antes de solicitar una tutoría?  
+
+|The Five WS and One H  |
+| - |
+|<p>**What**  </p><p>Percepción de utilidad de las reseñas y valoraciones al momento de elegir una tutoría.  </p><p>**Why**  </p><p>Para validar si este componente agrega valor en el proceso de toma de decisiones y debe priorizarse en diseño o mejoras.  </p><p>**When**  </p><p>Antes de hacer clic en “Solicitar tutoría” o durante la visualización del detalle de una tutoría.  </p><p>**Where**  </p><p>En la tarjeta o ficha detallada de cada tutoría donde se muestran reseñas y estrellas.  </p><p>**Who**  </p><p>Estudiantes que están en proceso de búsqueda activa de tutorías.  </p><p>**How**  </p><p>Mediante encuesta post-uso (“¿Te resultaron útiles los comentarios para decidir?”) con respuestas almacenadas en forms de google  </p>|
+
+17. ¿Los tutores se sienten cómodos con la posibilidad de ser evaluados por sus estudiantes?  
+
+
+
+
+|The Five WS and One H  |
+| - |
+|<p>**What**  </p><p>Nivel de aceptación de los tutores sobre ser evaluados públicamente tras cada sesión.  </p><p>**Why**  </p><p>Para prevenir resistencia, sesgos negativos o desmotivación en tutores por miedo a juicios públicos.  </p><p>**When**  </p><p>Durante la creación del perfil o después de impartir una tutoría (cuando se notifica que serán evaluados).  </p><p>**Where**  </p><p>En la sección de perfil de tutor o centro de notificaciones (post tutoría).  </p><p>**Who**  </p><p>Tutores activos o en proceso de configuración de sus tutorías.  </p><p>**How**  </p><p>Mediante encuestas a tutores con escalas de comodidad y campo abierto opcional para comentarios.  </p>|
+
+18. ¿Las reseñas influyen en la decisión de los estudiantes al seleccionar una tutoría?  
+
+|The Five WS and One H  |
+| - |
+|<p>**What**  </p><p>Grado de influencia que tienen las reseñas en la elección de una tutoría.  </p><p>**Why**  </p><p>Para confirmar si es un factor determinante que debe ser resaltado visualmente o priorizado en la jerarquía de información.  </p><p>**When**  </p><p>Durante el proceso de comparación entre opciones, antes de hacer clic en “Solicitar tutoría”.  </p><p>**Where**  </p><p>En la página de resultados de búsqueda y la vista de detalle de cada tutoría.  </p><p>**Who**  </p><p>Estudiantes activos que están comparando tutorías.  </p><p>**How**  </p><p>A/B testing mostrando tutorías con/sin reseñas visibles + encuesta sobre factores que más influyeron en su decisión.  </p>|
+
+4. Question Backlog 
+
+Esta es una herramienta estratégica utilizada durante las fases de investigación, validación de hipótesis y descubrimiento de producto. Su propósito es estructurar y priorizar las preguntas clave que el equipo de desarrollo necesita responder para garantizar que la solución propuesta se sincronice con las necesidades, comportamientos y expectativas reales de los usuarios. 
+
+Este backlog se organiza según las épicas funcionales del producto, permitiendo validar aspectos críticos como: la facilidad de uso del registro, la comprensión de los acuerdos de usuario, la creación y visualización de tutorías, así como la utilidad de las funciones de perfil y reseñas. Además, se priorizó el planteamiento de preguntas relacionadas a las funcionalidades principales del core business. 
+
+
+
+|EP01: Registro y Autenticación de Usuarios  |Como usuario, quiero registrarme y acceder a la plataforma de forma segura para utilizar los servicios disponibles según mi rol (estudiante o tutor).  |<p>**US01: Registro de Usuario**  </p><p>1. ¿Los usuarios completan el proceso de registro sin necesidad de asistencia adicional?  </p><p>2. ¿El uso del correo institucional como único medio de registro es comprendido y aceptado sin confusión?  </p><p>3. ¿El mensaje del reglamento de usuario es leído y comprendido antes de continuar con el registro?  </p><p>**US03: Selección de Rol**  </p><p>4. ¿Los estudiantes y tutores logran identificarse correctamente según su rol durante el registro?  </p>|
+| - | :- | - |
+|EP02: Gestión de Perfil de Usuario   |` `Como usuario, quiero gestionar mi perfil para mantener actualizada mi información personal y académica.  |<p>**US05: Crear Perfil**  </p><p>5. ¿Los usuarios encuentran fácilmente la opción para editar su perfil académico y personal?  </p><p>6. ¿Los tutores entienden qué información de su perfil es visible para los estudiantes?  </p><p>7. ¿Los usuarios sienten que el perfil es suficientemente completo para representar su identidad académica?  </p><p>**US06: Editar Perfil**  </p><p>8. ¿Con qué frecuencia los usuarios actualizan información </p>|
+
+
+
+|||clave como ciclo, carrera o datos de contacto?  |
+| :- | :- | :- |
+|EP03: Creación y Gestión de Tutorías    |` `Como tutor, quiero crear y gestionar mis tutorías en la plataforma para que los estudiantes puedan verlas.    |<p>**US08: Añadir Tutoría**  </p><p>9. ¿Los tutores comprenden rápidamente cómo crear una nueva tutoría desde su panel?  </p><p>**US09: Editar Tutoría**  </p><p>10. ¿Qué porcentaje de tutores edita o actualiza al menos una vez sus tutorías luego de publicarlas?  </p>|
+|EP04: Visualización y Solicitud de Tutorías    |Como estudiante, quiero ver las tutorías disponibles para encontrar ayuda académica.    |<p>**US12: Visualizar Tutorías Disponibles**    </p><p>11. ¿Los estudiantes encuentran en menos de 2 minutos una tutoría que se ajuste a su curso y ciclo?  </p><p>12. ¿Los filtros y organización por ciclo o curso son suficientes para ayudar en la búsqueda?  </p><p>**US14: Solicitar Tutoría**  </p><p>13. ¿Los estudiantes tienen preferencia clara entre contacto por WhatsApp o correo electrónico para solicitar tutorías?  </p>|
+|EP05: Acuerdos y Soporte Técnico    |Como usuario, quiero acceder a información sobre acuerdos y soporte técnico para comprender mis derechos, responsabilidades y recibir asistencia cuando enfrente problemas con el servicio.    |<p>**US16: Aceptar Términos y Condiciones**  </p><p>14. ¿Los usuarios saben cómo acceder al reglamento y lo consultan ante dudas?  </p><p>**US17: Contactar Soporte Técnico**    </p><p>15. ¿Con qué frecuencia los usuarios solicitan ayuda técnica para resolver problemas de uso?  </p>|
+|EP06: Gestión de Reseñas de Tutorías    |` `Como usuario, quiero gestionar reseñas de tutorías para compartir experiencias, ayudar a otros estudiantes a tomar decisiones |<p>**US20: Visualizar Reseñas**    </p><p>16. ¿Los usuarios consideran útil leer comentarios y valoraciones antes de solicitar una tutoría?  </p><p>17. ¿Los tutores se sienten cómodos con la posibilidad de ser evaluados por sus estudiantes?  </p>|
+
+
+
+||informadas y enviar un feedback.    |18\. ¿Las reseñas influyen en la decisión de los estudiantes al seleccionar una tutoría?  |
+| :- | :- | :- |
+
+5. Experiment Cards Experiment Card EP01 
+
+|Question  |¿Los usuarios completan el proceso de registro sin necesidad de asistencia adicional?  |
+| - | :- |
+|<p>Why  </p><p>Why is it important for us to find an answer?  </p>|Es fundamental que el registro sea intuitivo para reducir la fricción de entrada y aumentar la adopción de la plataforma.  |
+|<p>What  </p><p>What is the simplest useful thing we could do to answer the question?  </p>|Realizar una prueba de usabilidad con nuevos usuarios observando si completan el registro sin ayuda.  |
+|Hypothesis  |Creemos que el 90% de los usuarios podrán completar el registro sin requerir asistencia externa.  |
+
+Experiment Card EP02 
+
+|Question  |¿Los estudiantes y tutores logran identificarse correctamente según su rol durante el registro?  |
+| - | :- |
+|<p>Why  </p><p>Why is it important for us to find an answer?  </p>|Seleccionar correctamente el rol es clave para  ofrecerles las funcionalidades específicas de su perfil (estudiante o tutor).  |
+|<p>What  </p><p>What is the simplest useful thing we could do to answer the question?  </p>|Evaluar el porcentaje de usuarios que eligen el rol correcto en pruebas de registro simuladas.  |
+|Hypothesis  |Suponemos que al menos el 85% de los usuarios seleccionan correctamente su rol sin confusión.  |
+
+Experiment Card EP03 
+
+|Question  |¿La información solicitada (horario, precio, curso, ciclo) es clara y fácil de completar al crear o editar una tutoría?  |
+| - | - |
+|<p>Why  </p><p>Why is it important for us to find an answer?  </p>|La claridad en la creación de tutorías garantiza una oferta organizada y atractiva para los estudiantes.  |
+|<p>What  </p><p>What is the simplest useful thing we could do to answer the question?  </p>|Observar a tutores crear y editar tutorías en sesiones de prueba y recolectar sus comentarios.  |
+|Hypothesis  |El 80% de los tutores considerará que la interfaz para crear o editar tutorías es clara y fácil de usar.  |
+
+Experiment Card EP04 
+
+|Question  |¿Los estudiantes encuentran en menos de 2 minutos una tutoría que se ajuste a su curso y ciclo?  |
+| - | :- |
+|<p>Why  </p><p>Why is it important for us to find an answer?  </p>|La eficiencia en la búsqueda mejora la experiencia del usuario y la probabilidad de conversión.  |
+|<p>What  </p><p>What is the simplest useful thing we could do to answer the question?  </p>|Cronometrar la búsqueda de una tutoría específica por parte de estudiantes en una prueba guiada.  |
+|Hypothesis  |El 70% de los estudiantes podrán encontrar una tutoría adecuada en menos de 2 minutos.  |
+||
+| :- |
+||
+||
+||
+||
+||
+||
+||
+||
+|Experiment Card EP05 |
+
+
+
+|Question  |¿Los estudiantes entienden que los pagos no se realizan dentro de la plataforma?  |
+| - | :- |
+|<p>Why  </p><p>Why is it important for us to find an answer?  </p>|Evitar confusiones que puedan generar desconfianza o abandono durante la solicitud de tutoría.  |
+|<p>What  </p><p>What is the simplest useful thing we could do to answer the question?  </p>|Realizar entrevistas después de que los usuarios soliciten una tutoría y evaluar su entendimiento sobre el pago externo.  |
+|Hypothesis  |Como mínimo el 75% de los usuarios entenderán que la plataforma no gestiona pagos directamente.  |
+||
+| :- |
+|Experiment Card EP06 |
+|Question  |¿Los usuarios consideran útil leer comentarios y valoraciones antes de solicitar una tutoría?  |
+| - | :- |
+|<p>Why  </p><p>Why is it important for us to find an answer?  </p>|Validar si las reseñas aportan valor en la toma de decisión de los estudiantes.  |
+|<p>What  </p><p>What is the simplest useful thing we could do to answer the question?  </p>|Encuesta o prueba A/B mostrando tutorías con y sin reseñas visibles.  |
+|Hypothesis  |El 80% de los estudiantes indicarán que las reseñas influyen positivamente en su decisión de solicitar una tutoría.  |
+
+2. Experiment Design  
+
+8\.2.1. Hypotheses 
+
+Para el desarrollo de las hipótesis en esta etapa de diseño, se utilizarán diferentes herramientas y componentes de acuerdo con el caso. 
+
+EP01: Registro y Autenticación de Usuario 
+
+|Question  |¿Los usuarios completan el proceso de registro sin necesidad de asistencia adicional?  |
+| - | :- |
+
+
+
+|Hypothesi s  |Al menos el 90% de los usuarios registrados durante un test automatizado con 10 ejecuciones completarán el flujo de registro sin errores ni repeticiones de pasos. Se validará midiendo las tasas de éxito de flujo y tiempos de respuesta menores a 5s por pantalla.  |
+| :- | :- |
+|Data Analytics |<p>Se utilizará RedLine 13 para el análisis de la hipótesis planteada  </p><p>![](assets/Aspose.Words.f18970b1-5a23-40e9-8dd8-832170fe4b16.006.png)</p><p>![](assets/Aspose.Words.f18970b1-5a23-40e9-8dd8-832170fe4b16.007.png)</p>|
+||
+| :- |
+|EP02: Gestión de Perfil de Usuario    |
+|Question  |¿Los estudiantes y tutores logran identificarse correctamente según su rol durante el registro?  |
+| - | :- |
+|Hypothesis  |El 85% de los registros automatizados elegirán correctamente el campo "rol" en base a la simulación con datos diferenciados para tutores y estudiantes. Esto se verifica automáticamente por la distribución final de roles seleccionados en la base de datos tras 20 registros.  |
+|Data Analytics  |Se utilizará un conjunto de scripts automatizados en Selenium o JMeter para generar 20 registros con datos diferenciados por tipo de usuario (tutor o estudiante), y se verificará automáticamente la elección del campo "rol" mediante consultas directas a la base de datos.  |
+||
+| :- |
+|EP03: Creación y Gestión de Tutorías     |
+|Question  |¿La información solicitada (horario, precio, curso, ciclo) es clara y fácil de completar al crear o editar una tutoría?  |
+| - | :- |
+|Hypothesis  |El 80% de los usuarios completarán la creación/edición de una tutoría en menos de 90 segundos por flujo con menos de 2 errores de validación por sesión. Esto se medirá en sesiones simuladas usando Selenium o scripts JMeter en Redline13, capturando campos obligatorios y validaciones.  |
+
+
+
+|Data Analytics  |Se utilizará automatización de pruebas con Selenium o scripts JMeter ejecutados en Redline13 para simular múltiples sesiones de usuario. Estas herramientas permitirán medir con precisión el tiempo total requerido para completar el flujo de creación o edición de una tutoría, así como capturar la cantidad de errores de validación generados por sesión. Los datos recopilados incluirán timestamps de interacción con campos obligatorios, envío de formularios y mensajes de error.  |
+| - | :- |
+||
+| :- |
+|EP04: Visualización y Solicitud de Tutorías     |
+|Question  |¿Los estudiantes encuentran en menos de 2 minutos una tutoría que se ajuste a su curso y ciclo?  |
+| - | :- |
+|Hypothesis  |El 70% de las sesiones simuladas con estudiantes ficticios encontrarán al menos una tutoría relevante en menos de 120 segundos desde el ingreso al dashboard. Se mide el tiempo desde login hasta clic en "solicitar tutoría", considerando filtros aplicados correctamente.  |
+|Data Analytics  |Se utilizarán herramientas como Google Analytics o Firebase Analytics para registrar eventos clave del flujo de usuario, como el inicio de sesión, la aplicación de filtros y el clic en "solicitar tutoría". Se medirá el tiempo transcurrido entre el login y la solicitud de tutoría, y se analizará la proporción de sesiones que completan este flujo en 120 segundos o menos.  |
+||
+| :- |
+|EP05: Acuerdos y Soporte Técnico   |
+|Question  |¿Los estudiantes entienden que los pagos no se realizan dentro de la plataforma?  |
+| - | :- |
+|Hypothesis  |En pruebas post-uso, el 75% de los estudiantes reconocerán correctamente que el pago se gestiona externamente. Esto se validará con una pregunta al final del flujo de solicitud de tutoría, y se espera una tasa de respuesta correcta igual o mayor al 75% entre 20 sesiones.  |
+|Data Analytics  |Se utilizará un componente interactivo simple dentro del flujo de solicitud de tutoría, y esto combinado con una herramienta de analítica ligera (Hotjar + Google Sheets) para registrar respuestas y visualizar puntos de fuga o malentendidos.  |
+||
+| :- |
+||
+||
+|8\.2.2. Measures |
+||
+|EP01: Registro y Autenticación de Usuario |
+
+Medidas: 
+
+- **Tasa de éxito de registro (%):** número de registros completados sin errores / total de intentos.  
+- **Promedio de errores por sesión:** errores por validación capturados / total de sesiones.  
+- **Tiempo medio por pantalla:** tiempo promedio (ms) entre interacciones por cada paso del flujo.  
+- **Número de pasos repetidos:** veces que un usuario vuelve atrás o reinicia el formulario.  
+- **Latencia media de respuesta por pantalla:** medida con RedLine13 en ms.  
+
+EP02: Gestión de Perfil de Usuario 
+
+Medidas: 
+
+- **Distribución correcta del campo “rol” (%):** número de registros con rol correcto / total de registros.  
+- **Error de asignación de rol (%):** registros con asignación incorrecta del rol según los datos de entrada.  
+- **Número de veces que se cambia el campo "rol":** durante el flujo de registro automatizado.  
+- **Tiempo medio hasta la selección de rol:** para confirmar que se entiende sin demoras o dudas.  
+- **Proporción de perfiles activos correctos:** verificación en base de datos tras registro.  
+
+EP03: Creación y Gestión de Tutorías 
+
+Medidas: 
+
+- **Tiempo medio para completar el flujo (s):** desde inicio del formulario hasta envío exitoso.  
+- **Errores de validación promedio:** número total de errores por sesión / sesiones ejecutadas.  
+- **Tasa de éxito en primera ejecución (%):** % de usuarios que no repiten campos ni validaciones.  
+- **Tasa de cumplimiento por campo (%):** % de sesiones donde cada campo obligatorio fue completado correctamente en el primer intento.  
+- **Tasa de abandono (%):** sesiones donde el flujo no se completa.  
+
+EP04: Visualización y Solicitud de Tutorías 
+
+Medidas: 
+
+- **Tiempo medio hasta clic en "Solicitar Tutoría" (s):** desde login hasta solicitud.  
+- **% de sesiones con solicitud en < 120s:** sesiones que cumplen el objetivo de tiempo / total de sesiones.  
+- **Número de filtros aplicados correctamente por sesión:** para verificar comprensión del sistema de búsqueda.  
+- **Tasa de selección de tutoría relevante (%):** selección que coincide con el curso/ciclo esperado.  
+- **Puntos de salida sin solicitud:** % de usuarios que abandonan el flujo antes de solicitar tutoría.  
+
+EP05: Acuerdos y Soporte Técnico 
+
+Medidas: 
+
+- **Tasa de respuesta correcta sobre pagos (%):** número de respuestas correctas / total de encuestados post-flujo.  
+- **Tiempo medio en leer mensaje de pago:** (Hotjar) usando tiempo en pantalla o eventos de scroll.  
+- **Número de clics o scroll en sección de pago:** indicador de interacción o lectura efectiva.  
+- **% de estudiantes que marcan “no entendí” o comentarios abiertos sobre pagos.**  
+- **Mapa de calor de clics en elementos clave:** para detectar si la sección de aviso es visible.  
+3. Conditions 
+- **Público Objetivo:** El experimento estará dirigido a estudiantes universitarios de la Universidad Peruana de Ciencias Aplicadas (UPC) .  
+- **Entorno de Pruebas:** Las pruebas se realizarán en un entorno controlado, utilizando laptops o computadoras personales con conexión a internet. El acceso al sistema se hará mediante navegadores web compatibles (como Chrome o Firefox), simulando un entorno de uso real.  
+- **Período de Pruebas:** El período de pruebas tendrá una duración estimada de dos semanas, durante las cuales los usuarios podrán registrarse, solicitar tutorías, seleccionar tutores, y comunicarse con ellos a través de los canales externos ofrecidos por la plataforma (WhatsApp o correo electrónico).  
+- **Control de Variables Externas:** Se tomarán medidas para controlar factores externos que puedan interferir con los resultados, como interrupciones académicas, problemas de conectividad o limitaciones en la disponibilidad horaria de los tutores o estudiantes.  
+- **Condición Experimental:** Los usuarios interactuarán con una versión de la aplicación que incluye mensajes informativos sobre la gestión externa del pago, así como una interfaz optimizada para facilitar la solicitud de tutorías y el contacto con tutores mediante canales externos.  
+- **Condición de Control:** Un grupo de usuarios utilizará una versión básica de la aplicación que no incluye mensajes explicativos sobre el proceso de pago, para evaluar si esta diferencia afecta la comprensión del sistema y la experiencia de uso.  
+- **Consentimiento Informado:** Todos los participantes serán informados del propósito del experimento y deberán aceptar un consentimiento informado antes de utilizar el sistema. La información recopilada será anónima y utilizada únicamente con fines de evaluación académica.  
+- **Muestra Representativa:** Se seleccionará una muestra diversa de usuarios de distintas carreras, para asegurar la representatividad de los resultados obtenidos en el experimento.  
+- **Medición y Evaluación Continua:** Durante el experimento se recopilarán métricas clave como número de tutorías solicitadas, tiempo de navegación, comprensión del flujo de uso, y claridad del proceso de contacto con los tutores. Esta información se utilizará para evaluar y mejorar la experiencia del sistema.  
+4. Scale Calculations and Decisions 
+- **Rendimiento y Estabilidad del Sistema:** Se evaluará el comportamiento técnico de la plataforma durante las pruebas (tiempos de carga, errores, flujo de navegación) para garantizar que esté preparada para soportar una mayor cantidad de usuarios.  
+- **Tasa de Finalización de Tutorías:** Se analizará cuántos estudiantes completan exitosamente el proceso de solicitud y contacto con un tutor, como indicador clave de usabilidad y valor percibido.  
+- **Comprensión del Proceso de Comunicación Externa:** Se medirá si los estudiantes comprenden adecuadamente que los pagos y coordinación se realizan fuera del sistema, a través de los medios proporcionados (WhatsApp 
+  - correo). Una tasa de comprensión superior al 75% será considerada como umbral mínimo para escalar.  
+- **Retroalimentación de Usuarios:** Se recopilará y analizará la retroalimentación de los estudiantes sobre la claridad del proceso, facilidad de uso de la plataforma y utilidad general. Las sugerencias y quejas serán consideradas para ajustes antes de una implementación a mayor escala.  
+- **Participación Activa:** Se evaluará el nivel de participación y uso del sistema durante el piloto. Una adopción activa por parte de al menos el 60% de los usuarios registrados será un factor favorable para avanzar.  
+- **Viabilidad Técnica y Organizacional:** Antes de escalar, se analizarán los recursos disponibles (servidores, equipo técnico, soporte) y la capacidad de gestionar una expansión sin comprometer la experiencia del usuario.  
+- **Decisión de Escalado:** Si se cumplen los criterios establecidos y la evidencia recolectada durante el piloto es favorable, se procederá con la incorporación progresiva de nuevas universidades. En caso contrario, se planteará una nueva iteración del sistema antes de considerar una expansión y se mantendrá el sistema con el alcance inicial.  
+5. Methods Selection 
+
+Para evaluar el sistema de tutorías se utilizará una combinación de métodos cuantitativos y cualitativos: 
+
+- **Pruebas de usabilidad:** Los usuarios realizarán tareas clave como solicitar tutorías y contactar tutores por WhatsApp o correo, observando posibles dificultades.  
+- **Encuestas post-uso:** Se aplicarán encuestas breves para medir facilidad de uso, comprensión del proceso externo de pago y satisfacción general.  
+- **Análisis de métricas:** Se recogerán datos como número de tutorías solicitadas, tiempo de navegación y puntos de abandono.  
+- **Pruebas A/B (si aplica):** Se compararán versiones con y sin mensajes explicativos sobre el proceso externo para evaluar su impacto.  
+
+Estos métodos permitirán validar hipótesis, identificar mejoras y tomar decisiones basadas en evidencia real. 
+
+6. Data Analytics: Goals, KPIs and Metrics Selection 
+
+|**Objetivo**  |**KPI**  |**Métricas a medir**  |
+| - | - | - |
+|Validar que los usuarios completan el proceso de registro sin errores ni fricción  |% de registros exitosos sin errores  |<p>- Número de sesiones que completan el flujo de registro  </p><p>- % de errores HTTP 4xx o 5xx  </p><p>- Tiempo medio de carga por pantalla (≤ 5s recomendado) </p>|
+|Comprobar que los usuarios seleccionan correctamente su rol (tutor o estudiante)  |% de selección de rol  correcta  |<p>- Distribución final de roles en base de datos tras prueba masiva  </p><p>- Número de errores por selección incorrecta (si existe validación)  </p>|
+|Asegurar que el flujo de creación/edición de tutorías es usable y claro  |Tasa de finalización del flujo de tutoría  |<p>- Tiempo medio para completar la creación de una tutoría  </p><p>- % de formularios enviados sin errores de validación  </p><p>- Reintentos por campo obligatorio  </p>|
+|Medir eficiencia en la búsqueda de tutorías  |Tiempo promedio para encontrar y solicitar una tutoría  |<p>- Tiempo desde login hasta clic en "Solicitar tutoría"  </p><p>- Número de filtros aplicados  </p><p>- % de usuarios que encuentran tutoría relevante en <2 minutos  </p>|
+|Confirmar que el mensaje de pago externo se comprende correctamente  |% de usuarios que reconocen que el pago es externo  |<p>- Respuesta correcta en pregunta final del flujo  </p><p>- % de abandono por confusión sobre pagos  </p><p>- Visualización del mensaje de pago fuera de plataforma  </p>|
+|Validar que las reseñas influyen en la decisión de solicitud  |% de tutorías solicitadas con reseñas visibles vs. sin ellas (A/B)  |<p>- Número de tutorías solicitadas por variante (con/sin reseña)  </p><p>- Tiempo de lectura en secciones de reseñas  </p><p>- Ratio de clics en "Solicitar"</p>|
+
+
+
+|||desde página de tutor con buena valoración  |
+| :- | :- | :- |
+||
+| :- |
+||
+|8\.2.7. Web and Mobile Tracking Plan  |
+|Se mantendrá un plan detallado del seguimiento de actividades propuestas. Para ello, se |
+|crea el siguiente tablero usando la herramienta Trello: |
+|[https://trello.com/invite/b/68524d980a4914ec2e22e3e7/ATTIec6711ba167ddebd43ae94](https://trello.com/invite/b/68524d980a4914ec2e22e3e7/ATTIec6711ba167ddebd43ae94d89ada7b3aB87A0002/web-and-mobile-tracking-plan)|
+|[d89ada7b3aB87A0002/web-and-mobile-tracking-plan ](https://trello.com/invite/b/68524d980a4914ec2e22e3e7/ATTIec6711ba167ddebd43ae94d89ada7b3aB87A0002/web-and-mobile-tracking-plan) |
+||
+|![](assets/Aspose.Words.f18970b1-5a23-40e9-8dd8-832170fe4b16.008.jpeg)|
+||
+|8\.3. Experimentation |
+||
+|8\.3.1. To-Be User Stories |
+||
+|Esta sección recopila nuevas Historias de Usuario (User Stories) que todavía no forman |
+|parte del backlog oficial, pero que podrían incluirse en versiones futuras del producto. |
+|Estas historias surgen como resultado de experimentos, entrevistas, pruebas de |
+|usabilidad u observaciones realizadas durante el proceso de validación y el proceso |
+|XDPD. Reflejan necesidades, oportunidades de mejora o funcionalidades sugeridas que |
+|buscan optimizar la experiencia del usuario o resolver problemas detectados, y deben |
+|ser evaluadas antes de su desarrollo. |
+||
+||
+||
+||
+
+
+|ID  |Título   |Descripción  |Criterios de Aceptación  |Relacionado con (Epic ID)  |
+| - | - | - | - | :- |
+|TB  US01  |Registro fallido con feedback claro  |` `Como nuevo usuario, quiero recibir mensajes claros si hay errores al registrarme para poder corregirlos.  |<p>**Escenario 1: Validación de campos con errores**  </p><p>**Dado que** el usuario completa mal algún campo del registro  </p><p>**Y** está en la pantalla de registro  </p><p>**Cuando** intente enviar el formulario  </p><p>**Entonces** verá una señal de advertencia junto al campo con el error  </p><p>**Y** el sistema no permitirá continuar hasta que el error se corrija a de solución.  </p><p>**Escenario 2: Campos obligatorios no llenados**  </p><p>**Dado que** el usuario deja campos obligatorios vacíos en el formulario de registro  </p><p>**Cuando** haga clic en "Registrarse"  </p><p>**Entonces** cada campo vacío mostrará una señal de advertencia  </p><p>**Y** se enfocará automáticamente en el primer campo incompleto </p>|EP01  |
+|TB  US02  |Confirmación del método de pago externo  |Como estudiante, quiero ver una advertencia clara sobre el método de pago para no asumir que la plataforma lo gestiona internamente.  |<p>**Escenario 1: Mensaje tras solicitud de tutoría**  </p><p>**Dado que** el estudiante está por enviar la solicitud de tutoría  </p><p>**Cuando** llegue al paso final del proceso  **Entonces** verá un mensaje visible que indique que el pago se coordina por </p>|EP04  |
+
+
+
+||||<p>canales externos (WhatsApp o correo)  </p><p>**Y** el mensaje deberá estar resaltado visualmente.  </p><p>**Escenario 2: Confirmación activa de lectura del mensaje**  </p><p>**Dado que** el estudiante ve el mensaje sobre el pago externo  </p><p>**Cuando** intente finalizar la solicitud de tutoría  **Entonces** deberá marcar una casilla que confirme que ha leído y entendido que el pago no se hace por la plataforma  </p><p>**Y** si no la marca, el botón de enviar estará deshabilitado  </p>||
+| :- | :- | :- | :- | :- |
+|TB  US03  |Filtros avanzados por modalidad y horario  |Como estudiante, quiero filtrar tutorías por modalidad y horario para encontrar opciones adecuadas.  |<p>**Escenario 1: Filtrar tutorías por modalidad y horario**  </p><p>**Dado que** el estudiante navega en el dashboard de tutorías  </p><p>**Y** los filtros de búsqueda están visibles en la interfaz  </p><p>**Cuando** seleccione una modalidad (por ejemplo, "Virtual") y un rango de horario (por ejemplo, de 10:00 a 14:00)  </p><p>**Entonces** el sistema actualizará la lista de tutorías automáticamente  **Y** solo mostrará aquellas que coincidan con la modalidad y rango horario seleccionados  </p>|EP04  |
+
+
+
+||||<p>**Escenario 2: Aplicar filtros que no coinciden con ninguna tutoría**  </p><p>**Dado que** el estudiante aplica un filtro de modalidad y horario muy específico  </p><p>**Cuando** no haya tutorías que coincidan con esos criterios  </p><p>**Entonces** se mostrará un mensaje informativo que indique "No se encontraron tutorías con estos filtros"  </p>||
+| :- | :- | :- | :- | :- |
+|TB  US04  |Sistema de reseñas y puntuaciones  |Como estudiante, quiero dejar una reseña y calificación después de cada tutoría para compartir mi experiencia.  |<p>**Escenario 1: Publicar reseña después de recibir una tutoría**  </p><p>**Dado que** el estudiante ya recibió una tutoría,  **Cuando** accede nuevamente a los detalles de la tutoría,  </p><p>**Entonces** podrá dejar una reseña con estrellas y comentario visible públicamente.  </p><p>**Escenario 2: Solo estudiantes con tutoría realizada pueden dejar una reseña**  </p><p>**Dado que** un estudiante intenta calificar una tutoría que no ha recibido **Cuando** intente acceder a las reseñas para agregar una nueva  </p><p>**Entonces** el sistema le mostrará un mensaje indicando que no puede dejar reseña sin haber recibido la tutoría  </p>|EP06  |
+
+
+
+||||**Y** el botón de enviar reseña estará deshabilitado  ||
+| :- | :- | :- | :- | :- |
+8\.3.2. To-Be Product Backlog 
+
+Esta sección presenta un conjunto de elementos funcionales o técnicos que podrían incorporarse al producto como resultado de aprendizajes obtenidos durante la fase de experimentación. A diferencia del backlog actual, este To-Be Product Backlog no está aprobado aún para desarrollo, pero recoge funcionalidades, tareas o mejoras potenciales alineadas a las nuevas historias de usuario (To-Be User Stories). Cada ítem aquí descrito responde a hipótesis validadas, ideas factibles o necesidades recurrentes detectadas en pruebas con usuarios.  
+
+
+
+|#  Orden  |User Story ID  |Título  |Descripción  |<p>Story </p><p>Points (1 / </p><p>2 / 3 / 5 / 8)  </p>|
+| :- | :- | - | - | - |
+|1  |TB  US04  |Sistema de reseñas y puntuaciones  |Como estudiante, quiero dejar una reseña y calificación después de cada tutoría para compartir mi experiencia.  |3  |
+|2  |TB  US02  |Confirmación del método de pago externo  |Como estudiante, quiero ver una advertencia clara sobre el método de pago para no asumir que la plataforma lo gestiona internamente.  |2  |
+|3  |TB  US01  |Registro fallido con feedback claro  |Como nuevo usuario, quiero recibir mensajes claros si hay errores al registrarme para poder corregirlos.  |2  |
+|4  |TB  US03  |Filtros avanzados por modalidad y horario  |Como estudiante, quiero filtrar tutorías por modalidad y horario para encontrar opciones adecuadas.  |2  |
+
+[ref1]: assets/Aspose.Words.f18970b1-5a23-40e9-8dd8-832170fe4b16.003.png
+
+
 **Conclusiones y recomendaciones** 
 
 El proyecto **TutorMatch** ha logrado avances importantes en las primeras etapas de desarrollo, consolidando una base sólida para una solución tecnológica centrada en la mejora de la educación universitaria a través de tutorías colaborativas. A partir del análisis de usuarios, entrevistas, mapas de empatía y la segmentación de perfiles, se ha evidenciado una necesidad real de los estudiantes por contar con un espacio accesible, confiable y especializado para encontrar tutores afines a sus cursos, nivel académico y estilo de aprendizaje. 
