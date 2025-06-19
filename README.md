@@ -2086,43 +2086,46 @@ Tutoring  /api/v1/tutorings- ![ref8]Sessions  sessions
 
 [https://upcedupe-my.sharepoint.com/:v:/g/personal/u202218167_upc_edu_pe/EVGH- qB3IBtOjdzAxMbMWk8BAiqmHiV-jV9QftMVww6ptQ?e=yjijB6 ](https://upcedupe-my.sharepoint.com/:v:/g/personal/u202218167_upc_edu_pe/EVGH-qB3IBtOjdzAxMbMWk8BAiqmHiV-jV9QftMVww6ptQ?e=yjijB6)
 
-Capítulo VI: Product Verification & Validation 6.1. Testing Suites & Validation 
+**Capítulo VI: Product Verification & Validation** 
 
+1. Testing Suites & Validation  
 1. Core Entities Unit Tests 
 
 A continuación, te presento las pruebas unitarias para 5 funcionalidades principales de tu Product Backlog, enfocándome específicamente en las funciones exactas que realizan cada operación: 
 
 E01 - US02: Registro de usuario 
 
-![](assets/Aspose.Words.3512cffb-c000-4760-a8ee-a98d826675de.124.jpeg)
+![](assets/Aspose.Words.fec16d32-2b63-487b-8c4b-410bcc9e6ec5.001.jpeg)
 
 E02 - US03: Login de usuario 
 
-![](assets/Aspose.Words.3512cffb-c000-4760-a8ee-a98d826675de.125.jpeg)
+![](assets/Aspose.Words.fec16d32-2b63-487b-8c4b-410bcc9e6ec5.002.jpeg)
 
 E03 - US04: Crear perfil 
 
-![](assets/Aspose.Words.3512cffb-c000-4760-a8ee-a98d826675de.126.jpeg)
+![](assets/Aspose.Words.fec16d32-2b63-487b-8c4b-410bcc9e6ec5.003.jpeg)
 
-![](assets/Aspose.Words.3512cffb-c000-4760-a8ee-a98d826675de.127.jpeg)
+![](assets/Aspose.Words.fec16d32-2b63-487b-8c4b-410bcc9e6ec5.004.jpeg)
 
 E04 - US07: Añadir tutoría 
 
-![](assets/Aspose.Words.3512cffb-c000-4760-a8ee-a98d826675de.128.jpeg)
+![](assets/Aspose.Words.fec16d32-2b63-487b-8c4b-410bcc9e6ec5.005.jpeg)
 
-![](assets/Aspose.Words.3512cffb-c000-4760-a8ee-a98d826675de.129.png)
+![](assets/Aspose.Words.fec16d32-2b63-487b-8c4b-410bcc9e6ec5.006.png)
 
 E05 - US10: Visualizar tutorías disponibles 
 
-![](assets/Aspose.Words.3512cffb-c000-4760-a8ee-a98d826675de.130.jpeg)
+![](assets/Aspose.Words.fec16d32-2b63-487b-8c4b-410bcc9e6ec5.007.jpeg)
 
-![](assets/Aspose.Words.3512cffb-c000-4760-a8ee-a98d826675de.131.png)
+![](assets/Aspose.Words.fec16d32-2b63-487b-8c4b-410bcc9e6ec5.008.png)
 
 2. Core Integration Tests 
 
 En esta apartado, se describe cómo se llevaron a cabo las pruebas de integración para verificar que los distintos módulos o componentes del sistema operen adecuadamente al interactuar entre sí. Esto abarca la validación de la comunicación entre el frontend y el backend, así como las interacciones entre servicios o APIs. 
 
-User bounded context (Authentication & User Management) **User bounded context (Authentication & User Management)** 
+User bounded context (Authentication & User Management) 
+
+**User bounded context (Authentication & User Management)** 
 
 *import* { *describe*, *it*, *expect*, *beforeEach*, *afterEach*, *vi* } *from* '*vitest*'; *import* { *render*, *screen*, *fireEvent*, *waitFor* } *from* '*@testing-library/react*'; *import* { *AuthService* } *from* '*../../../public/services/authService*'; 
 
@@ -2168,7 +2171,9 @@ vi.*mock*('*../../../public/services/authService*'); vi.*mock*('*../../../user/s
 
 `      `}; 
 
-`      `// *Mock de la respuesta del servicio de autenticación*       (AuthService.login *as* *any*).*mockResolvedValue*({ 
+`      `// *Mock de la respuesta del servicio de autenticación* 
+
+`      `(AuthService.login *as* *any*).*mockResolvedValue*({ 
 
 `        `*success*: *true*, 
 
@@ -2236,7 +2241,9 @@ vi.*mock*('*../../../public/services/authService*'); vi.*mock*('*../../../user/s
 
 `        `*email*: ['*U20654321@upc.edu.pe*'](mailto:U20654321@upc.edu.pe), 
 
-`        `*password*: '*Password123!*',         *firstName*: '*Jane*', 
+`        `*password*: '*Password123!*', 
+
+`        `*firstName*: '*Jane*', 
 
 `        `*lastName*: '*Doe*', 
 
@@ -2252,9 +2259,7 @@ vi.*mock*('*../../../public/services/authService*'); vi.*mock*('*../../../user/s
 
 `      `}); 
 
-`      `(UserService.createProfile *as* *any*).*mockResolvedValue*({ 
-
-`        `*success*: *true*, 
+`      `(UserService.createProfile *as* *any*).*mockResolvedValue*({         *success*: *true*, 
 
 `        `*profile*: { *userId*: '*new-user-123*', *...*newUser } 
 
@@ -2275,6 +2280,7 @@ vi.*mock*('*../../../public/services/authService*'); vi.*mock*('*../../../user/s
 `      `); 
 
 `      `// *Act* 
+
 
 `      `fireEvent.*change*(screen.*getByLabelText*(/*Correo electrónico*/*i*), {         *target*: { *value*: newUser.email } 
 
@@ -2322,25 +2328,15 @@ vi.*mock*('*../../../public/services/authService*'); vi.*mock*('*../../../user/s
 
 Tutoring bounded context 
 
-*import* { *describe*, *it*, *expect*, *beforeEach*, *afterEach*, *vi* } *from* '*vitest*'; 
+*import* { *describe*, *it*, *expect*, *beforeEach*, *afterEach*, *vi* } *from* '*vitest*'; *import* { *render*, *screen*, *fireEvent*, *waitFor* } *from* '*@testing-library/react*'; *import* { *TutoringService* } *from* '*../../../tutoring/services/TutoringService*'; *import* { *CourseService* } *from* '*../../../course/services/CourseService*'; *import* { *AuthProvider* } *from* '*../../../user/hooks/useAuth*'; 
 
-*import* { *render*, *screen*, *fireEvent*, *waitFor* } *from* '*@testing-library/react*'; 
+*import* CreateTutoringModal *from* '*../../../dashboard/components/CreateTutoringModal*'; 
 
-*import* { *TutoringService* } *from* '*../../../tutoring/services/TutoringService*'; 
-
-*import* { *CourseService* } *from* '*../../../course/services/CourseService*'; 
-
-*import* { *AuthProvider* } *from* '*../../../user/hooks/useAuth*'; 
-
-*import* CreateTutoringModal *from* '*../../../dashboard/components/CreateTutoringModal*'; *import* TutoringsListPage *from* '*../../../tutoring/pages/TutoringsList*'; 
-
-*import* { *BrowserRouter* } *from* '*react-router-dom*'; 
+*import* TutoringsListPage *from* '*../../../tutoring/pages/TutoringsList*'; *import* { *BrowserRouter* } *from* '*react-router-dom*'; 
 
 // *Mock de los servicios* 
 
-vi.*mock*('*../../../tutoring/services/TutoringService*'); vi.*mock*('*../../../course/services/CourseService*'); 
-
-vi.*mock*('*../../../user/hooks/useAuth*', () *=>* ({ 
+vi.*mock*('*../../../tutoring/services/TutoringService*'); vi.*mock*('*../../../course/services/CourseService*'); vi.*mock*('*../../../user/hooks/useAuth*', () *=>* ({ 
 
 `  `*useAuth*: () *=>* ({ 
 
@@ -2466,7 +2462,9 @@ vi.*mock*('*../../../user/hooks/useAuth*', () *=>* ({
 
 `            `*title*: newTutoring.title, 
 
-`            `*description*: newTutoring.description,             *courseId*: newTutoring.courseId, 
+`            `*description*: newTutoring.description, 
+
+`            `*courseId*: newTutoring.courseId, 
 
 `            `*price*: newTutoring.price 
 
@@ -2496,11 +2494,10 @@ vi.*mock*('*../../../user/hooks/useAuth*', () *=>* ({
 
 `          `*id*: '*tutoring-1*', 
 
+
 `          `*title*: '*Calculus Help*', 
 
-`          `*description*: '*Derivatives and integrals made easy*', 
-
-`          `*price*: 45, 
+`          `*description*: '*Derivatives and integrals made easy*',           *price*: 45, 
 
 `          `*courseId*: '*course-1*', 
 
@@ -2534,9 +2531,7 @@ vi.*mock*('*../../../user/hooks/useAuth*', () *=>* ({
 
 `      `]; 
 
-`      `(TutoringService.getAvailableTutorings *as* *any*).*mockResolvedValue*({ 
-
-`        `*success*: *true*, 
+`      `(TutoringService.getAvailableTutorings *as* *any*).*mockResolvedValue*({         *success*: *true*, 
 
 `        `tutorings 
 
@@ -2578,9 +2573,7 @@ Course bounded context
 
 *import* { *describe*, *it*, *expect*, *beforeEach*, *vi* } *from* '*vitest*'; 
 
-*import* { *render*, *screen*, *waitFor* } *from* '*@testing-library/react*'; 
-
-*import* { *CourseService* } *from* '*../../../course/services/CourseService*'; 
+*import* { *render*, *screen*, *waitFor* } *from* '*@testing-library/react*'; *import* { *CourseService* } *from* '*../../../course/services/CourseService*'; 
 
 *import* { *SemesterProvider* } *from* '*../../../course/context/SemesterContext*'; // *Asumiendo que existe este provider* 
 
@@ -2598,7 +2591,7 @@ vi.*mock*('*../../../course/services/CourseService*');
 
 `  `}); 
 
-`  `*describe*('*ListCourses\_GivenAvailableCourses\_ShouldDisplayCoursesByCurrentSemester*', () *=>* { 
+`  `*describe*('*ListCourses\_GivenAvailableCourses\_ShouldDisplayCoursesByCurrentSeme ster*', () *=>* { 
 
 `    `*it*('*should fetch and display courses for the current semester*', *async* () *=>* { 
 
@@ -2666,7 +2659,9 @@ vi.*mock*('*../../../course/services/CourseService*');
 
 `    `}); 
 
-`  `}); }); 
+`  `}); 
+
+}); 
 
 Schedule bounded context 
 
@@ -2686,9 +2681,7 @@ Schedule bounded context
 
 // *Mock de los servicios* 
 
-vi.*mock*('*../../../tutoring/services/TutoringService*'); vi.*mock*('*../../../schedule/services/ScheduleService*'); 
-
-vi.*mock*('*../../../user/hooks/useAuth*', () *=>* ({ 
+vi.*mock*('*../../../tutoring/services/TutoringService*'); vi.*mock*('*../../../schedule/services/ScheduleService*'); vi.*mock*('*../../../user/hooks/useAuth*', () *=>* ({ 
 
 `  `*useAuth*: () *=>* ({ 
 
@@ -2698,9 +2691,7 @@ vi.*mock*('*../../../user/hooks/useAuth*', () *=>* ({
 
 `  `}), 
 
-`  `*AuthProvider*: ({ *children* }*:* { *children: React*.*ReactNode* }) *=>* <>{children}*<*/*>* 
-
-})); 
+`  `*AuthProvider*: ({ *children* }*:* { *children: React*.*ReactNode* }) *=>* <>{children}*<*/*>* })); 
 
 *describe*('*Schedule Integration Tests*', () *=>* { 
 
@@ -2710,9 +2701,11 @@ vi.*mock*('*../../../user/hooks/useAuth*', () *=>* ({
 
 `  `}); 
 
-*describe*('*ViewSchedule\_GivenUserWithTutorings\_ShouldDisplayCalendarWithScheduledTutori ngs*', () *=>* { 
+`  `*describe*('*ViewSchedule\_GivenUserWithTutorings\_ShouldDisplayCalendarWithSched uledTutorings*', () *=>* { 
 
-`    `*it*('*should fetch and display tutoring appointments in calendar*', *async* () *=>* {       // *Arrange* 
+`    `*it*('*should fetch and display tutoring appointments in calendar*', *async* () *=>* { 
+
+`      `// *Arrange* 
 
 `      `*const* scheduledTutorings = [ 
 
@@ -2740,9 +2733,7 @@ vi.*mock*('*../../../user/hooks/useAuth*', () *=>* ({
 
 `          `*tutoringId*: '*tutoring-2*', 
 
-`          `*tutoringTitle*: '*Programming Help*', 
-
-`          `*date*: '*2023-05-22*', 
+`          `*tutoringTitle*: '*Programming Help*',           *date*: '*2023-05-22*', 
 
 `          `*startTime*: '*10:00*', 
 
@@ -2810,9 +2801,7 @@ Support bounded context
 
 // *Mock de los servicios* 
 
-vi.*mock*('*../../../support/services/SupportService*'); 
-
-vi.*mock*('*../../../user/hooks/useAuth*', () *=>* ({ 
+vi.*mock*('*../../../support/services/SupportService*'); vi.*mock*('*../../../user/hooks/useAuth*', () *=>* ({ 
 
 `  `*useAuth*: () *=>* ({ 
 
@@ -2822,9 +2811,7 @@ vi.*mock*('*../../../user/hooks/useAuth*', () *=>* ({
 
 `  `}), 
 
-`  `*AuthProvider*: ({ *children* }*:* { *children: React*.*ReactNode* }) *=>* <>{children}*<*/*>* 
-
-})); 
+`  `*AuthProvider*: ({ *children* }*:* { *children: React*.*ReactNode* }) *=>* <>{children}*<*/*>* })); 
 
 *describe*('*Support Integration Tests*', () *=>* { 
 
@@ -2834,9 +2821,7 @@ vi.*mock*('*../../../user/hooks/useAuth*', () *=>* ({
 
 `  `}); 
 
-`  `*describe*('*SubmitSupportTicket\_GivenValidData\_ShouldSubmitSuccessfully*', () *=>* { 
-
-`    `*it*('*should submit support ticket and show confirmation message*', *async* () *=>* { 
+`  `*describe*('*SubmitSupportTicket\_GivenValidData\_ShouldSubmitSuccessfully*', () *=>* {     *it*('*should submit support ticket and show confirmation message*', *async* () *=>* { 
 
 `      `// *Arrange* 
 
@@ -2904,11 +2889,9 @@ vi.*mock*('*../../../user/hooks/useAuth*', () *=>* ({
 
 `            `*subject*: ticketData.subject, 
 
-`            `*message*: ticketData.message, 
+`            `*message*: ticketData.message,             *category*: ticketData.category           }) 
 
-`            `*category*: ticketData.category 
-
-`          `})         ); 
+`        `); 
 
 `      `}); 
 
@@ -2924,383 +2907,477 @@ vi.*mock*('*../../../user/hooks/useAuth*', () *=>* ({
 
 3. Core Behavior-Driven Development 
 
-En  el  siguiente  apartado,  se  mostrarán  las  principales  pruebas  realizadas  con  Cucumber. Acceptance Tests: 
+En el siguiente apartado, se mostrarán las principales pruebas realizadas con Cucumber. Acceptance Tests: 
 
 Url del repositorio:[ https://github.com/SkillSwap-UPC/TutorMatch-acceptance-tests ](https://github.com/SkillSwap-UPC/TutorMatch-acceptance-tests)
 
-![](assets/Aspose.Words.3512cffb-c000-4760-a8ee-a98d826675de.132.jpeg)
+![](assets/Aspose.Words.fec16d32-2b63-487b-8c4b-410bcc9e6ec5.009.jpeg)
 
-![](assets/Aspose.Words.3512cffb-c000-4760-a8ee-a98d826675de.133.jpeg)
+![](assets/Aspose.Words.fec16d32-2b63-487b-8c4b-410bcc9e6ec5.010.jpeg)
 
-![](assets/Aspose.Words.3512cffb-c000-4760-a8ee-a98d826675de.134.jpeg)
+![](assets/Aspose.Words.fec16d32-2b63-487b-8c4b-410bcc9e6ec5.011.jpeg)
 
-![](assets/Aspose.Words.3512cffb-c000-4760-a8ee-a98d826675de.135.jpeg)
+![](assets/Aspose.Words.fec16d32-2b63-487b-8c4b-410bcc9e6ec5.012.jpeg)
 
-![](assets/Aspose.Words.3512cffb-c000-4760-a8ee-a98d826675de.136.jpeg)
+![](assets/Aspose.Words.fec16d32-2b63-487b-8c4b-410bcc9e6ec5.013.jpeg)
 
-![](assets/Aspose.Words.3512cffb-c000-4760-a8ee-a98d826675de.137.jpeg)
+![](assets/Aspose.Words.fec16d32-2b63-487b-8c4b-410bcc9e6ec5.014.jpeg)
 
-![](assets/Aspose.Words.3512cffb-c000-4760-a8ee-a98d826675de.138.jpeg)
+![](assets/Aspose.Words.fec16d32-2b63-487b-8c4b-410bcc9e6ec5.015.jpeg)
 
-![](assets/Aspose.Words.3512cffb-c000-4760-a8ee-a98d826675de.139.jpeg)
+![](assets/Aspose.Words.fec16d32-2b63-487b-8c4b-410bcc9e6ec5.016.jpeg)
 
-![](assets/Aspose.Words.3512cffb-c000-4760-a8ee-a98d826675de.140.jpeg)
+![](assets/Aspose.Words.fec16d32-2b63-487b-8c4b-410bcc9e6ec5.017.jpeg)
 
-![](assets/Aspose.Words.3512cffb-c000-4760-a8ee-a98d826675de.141.jpeg)
+![](assets/Aspose.Words.fec16d32-2b63-487b-8c4b-410bcc9e6ec5.018.jpeg)
 
-![](assets/Aspose.Words.3512cffb-c000-4760-a8ee-a98d826675de.142.jpeg)
+![](assets/Aspose.Words.fec16d32-2b63-487b-8c4b-410bcc9e6ec5.019.jpeg)
 
-![](assets/Aspose.Words.3512cffb-c000-4760-a8ee-a98d826675de.143.jpeg)
+![](assets/Aspose.Words.fec16d32-2b63-487b-8c4b-410bcc9e6ec5.020.jpeg)
 
-![](assets/Aspose.Words.3512cffb-c000-4760-a8ee-a98d826675de.144.jpeg)
+![](assets/Aspose.Words.fec16d32-2b63-487b-8c4b-410bcc9e6ec5.021.jpeg)
 
-![](assets/Aspose.Words.3512cffb-c000-4760-a8ee-a98d826675de.145.jpeg)
+![](assets/Aspose.Words.fec16d32-2b63-487b-8c4b-410bcc9e6ec5.022.jpeg)
 
-![](assets/Aspose.Words.3512cffb-c000-4760-a8ee-a98d826675de.146.jpeg)
+![](assets/Aspose.Words.fec16d32-2b63-487b-8c4b-410bcc9e6ec5.023.jpeg)
 
 4. Core System Tests 
 
-En esta sección, se describen las pruebas fundamentales realizadas sobre el sistema central con el objetivo de garantizar su correcto funcionamiento. Estas pruebas se enfocan en verificar la lógica principal  del  sistema,  asegurando  que  los  componentes  críticos  operen  conforme  a  los requerimientos establecidos.  
-
-**Epic 01: Registro y Autenticación de Usuarios** ![ref9]**Como** usuario, 
-
-**Quiero** registrarme y acceder a la plataforma de forma segura 
+En esta sección, se describen las pruebas fundamentales realizadas sobre el sistema central con el objetivo de garantizar su correcto funcionamiento. Estas pruebas se enfocan en verificar la lógica principal del sistema, asegurando que los componentes críticos operen conforme a los requerimientos establecidos.  
 
 
 
-|**Para** utilizar los servicios disponibles según mi rol (estudiante o tutor) |
+|<p>**Epic 01: Registro y Autenticación de Usuarios**  </p><p>**Como** usuario,  </p><p>**Quiero** registrarme y acceder a la plataforma de forma segura  **Para** utilizar los servicios disponibles según mi rol (estudiante o tutor)  </p>|
 | - |
-|<p>**Prueba con selenium:** </p><p>![](assets/Aspose.Words.3512cffb-c000-4760-a8ee-a98d826675de.148.jpeg)</p>|
+|**Prueba con selenium:**  |
+
+![](assets/Aspose.Words.fec16d32-2b63-487b-8c4b-410bcc9e6ec5.024.png)
 
 
 
-|<p>**Epic 02: Gestión de Perfil de Usuario** </p><p>**Como** usuario, </p><p>**Quiero** gestionar mi perfil </p><p>**Para** mantener actualizada mi información personal y académica. </p>|
+|<p>**Epic 02: Gestión de Perfil de Usuario**  </p><p>**Como** usuario,  </p><p>**Quiero** gestionar mi perfil  </p><p>**Para** mantener actualizada mi información personal y académica.  </p>|
 | - |
-|**Prueba con selenium:** |
-
-![](assets/Aspose.Words.3512cffb-c000-4760-a8ee-a98d826675de.149.png)
+|<p>**Prueba con selenium:**  </p><p>![](assets/Aspose.Words.fec16d32-2b63-487b-8c4b-410bcc9e6ec5.025.jpeg)</p>|
 
 
 
-|<p>**Epic 03: Creación y Gestión de Tutorías** **Como** tutor, </p><p>**Quiero** crear y gestionar mis tutorías en la plataforma **Para** que los estudiantes puedan verlas. </p>|
+|<p>**Epic 03: Creación y Gestión de Tutorías**  **Como** tutor,  </p><p>**Quiero** crear y gestionar mis tutorías en la plataforma  **Para** que los estudiantes puedan verlas.  </p>|
 | :-: |
-|**Prueba con selenium:** |
+|**Prueba con selenium:**  |
 
-![](assets/Aspose.Words.3512cffb-c000-4760-a8ee-a98d826675de.150.png)
+![](assets/Aspose.Words.fec16d32-2b63-487b-8c4b-410bcc9e6ec5.026.png)
 
 
 
-|<p>**Epic 04: Visualización de Tutorías** **Como** estudiante, </p><p>**Quiero** ver las tutorías disponibles **Para** encontrar ayuda académica. </p>|
+|<p>**Epic 04: Visualización de Tutorías**  **Como** estudiante,  </p><p>**Quiero** ver las tutorías disponibles  **Para** encontrar ayuda académica.  </p>|
 | :-: |
-|**Prueba con selenium:** |
+|<p>**Prueba con selenium:**  </p><p>![](assets/Aspose.Words.fec16d32-2b63-487b-8c4b-410bcc9e6ec5.027.jpeg)</p>|
 
-![](assets/Aspose.Words.3512cffb-c000-4760-a8ee-a98d826675de.151.png)
+**Epic 05: Solicitud de Tutorías**  ![](assets/Aspose.Words.fec16d32-2b63-487b-8c4b-410bcc9e6ec5.028.png)
+
+**Como** estudiante,  
+
+**Quiero** solicitar tutorías  
+
+**Para** ajustarme a mis necesidades académicas.  
+
+**Prueba con selenium:**  ![](assets/Aspose.Words.fec16d32-2b63-487b-8c4b-410bcc9e6ec5.029.png)![](assets/Aspose.Words.fec16d32-2b63-487b-8c4b-410bcc9e6ec5.030.jpeg)
+
+2. Static testing & Verification 
+
+6\.2.1. Static Code Analysis 
+
+Durante  la  etapa  de  verificación  estática  del  código  en  el  proyecto  TutorMatch,  se implementaron prácticas y herramientas orientadas a la detección temprana de errores, malas prácticas y vulnerabilidades sin necesidad de ejecutar el software. Esta fase fue clave para asegurar la mantenibilidad, calidad y seguridad del código antes de integrarlo en producción. 
+
+1. Coding standard & Code conventions. 
+
+En TutorMatch, se definieron y aplicaron estándares de codificación estrictos adaptados a los lenguajes y frameworks utilizados, como JavaScript con NestJS, HTML y CSS. **Estándares de Codificación:** 
+
+- **Convención  ESLint**:  Se  usó  ESLint  para  JavaScript  con  reglas personalizadas, garantizando un estilo de código uniforme y legible.  
+- **CamelCase para variables y clases**: Se definieron convenciones claras, como el uso de camelCase para variables y PascalCase para clases en el frontend.  
+- **Indentación  y  comentarios**:  Se  promovió  el  uso  consistente  de indentación  y  la  inclusión  de  comentarios  explicativos,  favoreciendo  la mantenibilidad del código.  
+
+**Convenciones de Código en Frontend:** 
+
+- **HTML semántico**: Se aplicaron etiquetas como <header>, <section>, <footer>, mejorando accesibilidad y SEO.  
+- **Nombres descriptivos en clases CSS**: Se usaron nombres como .navbar, .membership-banner-price, siguiendo una estructura comprensible.  
+- **Uso  de  variables  CSS  y  transiciones**:  Las  animaciones  CSS  se controlaron  mediante  variables  como  --i  y  se  implementaron  transiciones suaves para mejorar la UX.  
+
+**Control de versiones y estilo de commits:** 
+
+- Se utilizó el estándar *Conventional Commits* para asegurar claridad en los mensajes, utilizando etiquetas como feat, fix, doc, add.  
+2. Code Quality & Code Security. 
+
+En esta sección se analizan dos aspectos críticos para la robustez del sistema: la calidad del código y su seguridad. 
+
+**Code Quality:** 
+
+- **Linting y Tipado Estático**: Se implementaron herramientas como ESLint para JavaScript/TypeScript, junto con TypeScript para validación de tipos en tiempo de compilación.  
+- **Análisis de complejidad y duplicación**: Se evaluó el código con herramientas como SonarQube, para identificar funciones complejas o duplicadas y mejorar su mantenibilidad.  
+- **Cobertura de código**: Se utilizó Jest para pruebas unitarias y generación de reportes de cobertura, lo que permitió asegurar un alto porcentaje de código probado.  
+
+**Code Security:** 
+
+- **Análisis de vulnerabilidades**: Se contempló el uso de herramientas como ESLint, SonarQube y Checkmarx para detectar vulnerabilidades típicas como inyecciones SQL, XSS o fugas de datos.  
+- **Verificación del flujo de autenticación**: Se validó la implementación segura del login y la gestión de sesiones, asegurando un manejo correcto de datos sensibles.  
+- **Monitoreo post-despliegue**: Se emplearon herramientas como Sentry y Winston para rastrear errores en tiempo real, permitiendo respuestas rápidas ante incidentes en producción.  
+
+Estas prácticas garantizan que el producto sea seguro, escalable y mantenible, alineándose con las mejores prácticas en ingeniería de software. 
+
+3. Validation Interviews. 
+
+Con el propósito de verificar la efectividad de la solución implementada, se llevan a cabo entrevistas con candidatos de los segmentos objetivo para medir su grado de satisfacción y aceptación del futuro producto. Para ello se guardó el siguiente registro:  
+
+1. Diseño de Entrevistas. **Segmento: Tutores** Preguntas de Introducción: 
+- ¿Cuál es su nombre completo?  
+- ¿Cuál es su edad?  
+- ¿En qué ciudad y/o distrito reside?  
+- ¿Cuál es su ciclo y carrera?  
+
+Preguntas Principales: 
+
+- ¿Le resultó el proceso de registro en la plataforma?  
+- ¿Siente que la validación del correo institucional es una medida adecuada para asegurar la autenticidad de los usuarios?  
+- ¿Fue sencillo encontrar la sección de tutorías?  
+- ¿Consideras que la organización de las tutorías por ciclo facilita la búsqueda de ayuda para tus cursos?  
+- ¿Te resultan claros los detalles de cada tutoría, como el precio, horarios y descripción al momento de crearla o editarla?  
+- ¿Te parece conveniente el redireccionamiento a Outlook o WhatsApp para coordinar los detalles de una tutoría? ¿Preferirías una opción de contacto directo dentro de la plataforma?  
+
+**Segmento: Estudiantes** Preguntas de Introducción: 
+
+- ¿Cuál es tu nombre completo?  
+- ¿Cuál es tu edad?  
+- ¿En qué ciudad y/o distrito vives actualmente?  
+- ¿En qué ciclo y carrera estás?  
+
+Preguntas Principales: 
+
+- ¿Pudiste registrarte sin problemas usando tu correo institucional?  
+- ¿Te pareció claro el mensaje sobre el acuerdo de usuario al momento del registro?  
+- ¿Fue fácil entender cómo funciona el dashboard de tutorías disponibles?  
+- ¿Te resultó sencillo buscar tutorías para tus cursos?  
+- ¿La información que aparece en cada tutoría (como el horario, curso, tutor y ciclo) te pareció clara?  
+- ¿Te parece útil poder contactar al tutor por WhatsApp o correo electrónico?  
+- ¿Preferirías tener un chat interno dentro de la plataforma para coordinar la tutoría?  
+- ¿Te parece confiable solicitar una tutoría sabiendo que los usuarios son cuentas verificadas de la misma universidad?  
+2. Registro de Entrevistas. 
+
+En esta sección se registran detalladamente las entrevistas de validación realizadas a los dos segmentos objetivos. Se adjunta el enlace completo: [https://youtu.be/ECGrFvhWNyw ](https://youtu.be/ECGrFvhWNyw)
+
+Segmento: Estudiante 
+
+![](assets/Aspose.Words.fec16d32-2b63-487b-8c4b-410bcc9e6ec5.031.jpeg)Nombre Completo del entrevistado: Diego Sebastian Valdivia Colque Edad: 20 años 
+
+Distrito: Bellavista - Callao 
+
+URL:[ https://youtu.be/k7To-AVKAGI ](https://youtu.be/k7To-AVKAGI)Inicio de entrevista: 00:05 
+
+Duración: 07:45 
+
+Cierre: 07:50 
+
+Resumen:  
+
+Diego Sebastian Valdivia Colque, un estudiante de 20 años que reside en Bellavista, Callao, compartió su experiencia utilizando una plataforma de tutorías universitarias. Señaló que el proceso de registro fue sencillo y no tuvo inconvenientes al usar su correo institucional. Además, el mensaje sobre el acuerdo de usuario le pareció claro, lo que le dio confianza desde el inicio. 
+
+Durante su uso de la plataforma, encontró que el panel de tutorías disponibles era fácil de entender y que buscar tutorías para sus cursos fue un proceso intuitivo. También valoró la claridad de la información presentada en cada tutoría, como el horario, curso, tutor y ciclo, lo cual le permitió tomar decisiones con seguridad. 
+
+Diego  consideró  muy  útil  poder  contactar  a  los  tutores  por  WhatsApp  o  correo electrónico,  aunque  indicó  que  preferiría  contar  con  un  chat  interno  dentro  de  la plataforma para facilitar la coordinación. Finalmente, destacó que el hecho de que las cuentas  estén  verificadas  dentro  de  la  misma  universidad  le  genera  confianza  para solicitar tutorías. 
+
+En  general,  su  experiencia  fue  positiva  y  considera  que  la  plataforma  cumple adecuadamente su función. 
+
+Segmento: Tutor 
+
+![](assets/Aspose.Words.fec16d32-2b63-487b-8c4b-410bcc9e6ec5.032.jpeg)
+
+Nombre Completo del entrevistado: Sergio Andre Gomez Vallejos Edad: 20 años 
+
+Distrito: Comas 
+
+URL:[ https://youtu.be/ECGrFvhWNyw ](https://youtu.be/ECGrFvhWNyw) Inicio de entrevista: 07:52 
+
+Duración: 8:00 
+
+Cierre: 15:55  
+
+Resumen: 
+
+Sergio comentó haber experimentado un leve retraso en la recepción del correo de confirmación institucional, lo cual generó incertidumbre respecto al estado de su inscripción o activación de cuenta. 
+
+Además, propuso como mejora la implementación de un medio de comunicación interno dentro de la plataforma, que permita mantener una interacción más fluida entre los usuarios y el equipo de soporte, reduciendo la dependencia exclusiva del correo electrónico. Esta sugerencia apunta a optimizar la experiencia del usuario y resolver incidencias de forma más oportuna. 
+
+Por otro lado, destacó de forma positiva que la interfaz de la aplicación es intuitiva y fácil de usar, lo que le permitió familiarizarse rápidamente con las funciones principales sin necesidad de asistencia externa. Esta experiencia refleja un buen diseño en términos de usabilidad y accesibilidad. 
+
+3. Evaluaciones según heurísticas 
+
+Para esta sección se tomaran en cuenta las siguientes heurísticas: 
+
+- 1: Visibility of System Status  
+
+El sistema debe mantener informados a los usuarios sobre lo que está ocurriendo, a través de retroalimentación clara e inmediata ante cada acción. 
+
+- 2: Match Between the System and the Real World  
+
+La interfaz debe usar lenguaje, conceptos e iconografía familiar para el usuario, imitando la lógica del mundo real para facilitar el entendimiento. 
+
+- 3: User Control and Freedom  
+
+El usuario debe tener siempre el control: poder deshacer acciones, cancelar procesos y navegar libremente sin quedar atrapado en flujos rígidos. 
+
+- 4: Consistency and Standards  
+
+Se deben seguir convenciones y estándares de diseño. Elementos similares deben comportarse igual en toda la plataforma para evitar confusión. 
+
+- 5: Error Prevention  
+
+Se deben diseñar interfaces que eviten errores antes de que ocurran, por ejemplo con validaciones, restricciones o mensajes de advertencia. 
+
+- 6: Recognition Rather than Recall  
+
+El sistema debe minimizar la carga de memoria del usuario, mostrando información relevante y accesos visibles en lugar de exigir recordar pasos. 
+
+- 7: Flexibility and Efficiency of Use  
+
+La interfaz debe permitir que tanto usuarios novatos como avanzados puedan usarla eficientemente, incluyendo atajos o personalización si es posible.  
+
+- 8: Aesthetic and Minimalist Design  
+
+El diseño debe ser visualmente limpio y centrado en lo esencial. No debe mostrar información o elementos innecesarios que distraigan o saturen. 
+
+- 9: Help Users Recognize, Diagnose, and Recover from Errors  Los mensajes de error deben ser comprensibles, indicar el problema y orientar claramente sobre cómo solucionarlo.  
+- 10: Help and Documentation  
+
+Aunque el sistema debería ser intuitivo, siempre debe haber ayuda accesible y fácil de consultar si el usuario lo necesita. 
+
+4. Auditoría de Experiencias de Usuario. 
+
+A continuación, se presentan los informes de auditorías recibidos y realizados para el sprint actual. 
+
+1. Auditoría realizada. 
+1. Información del grupo auditado. 
+- Nombre del grupo auditado: Movirent  
+- Responsable del equipo: Mathias Alejandro Jave Diaz  
+- Integrantes del equipo auditado:  
+  - Mathias Alejandro Jave Diaz  
+  - Sebastian Valente Lobato Pozo  
+  - Mathias Adriano Hidalgo Lopez  
+  - Alexandra Belen Ramos Argüelles  
+  - Gustavo Huilca Chipana  
+- Objetivo de la auditoría: Evaluar la usabilidad de las funciones principales de la plataforma de la Startup Movirent para dentificar hallazgos críticos y proponer mejoras alineadas a principios de usabilidad reconocidos (heurísticas de Nielsen).  
+2. Cronograma de auditoría realizada. 
 
 
 
-|<p>**Epic 05: Solicitud de Tutorías** </p><p>**Como** estudiante, </p><p>**Quiero** solicitar tutorías </p><p>**Para** ajustarme a mis necesidades académicas. </p>|
+|**Actividad**  |**Fecha de ejecución** |` `**Duración estimada** |**Responsables**  |
+| - | - | - | - |
+|Planificación de auditoría  |12/06/2025  |1 día  |Equipo TutorMatch  |
+|Evaluación heurística de la plataforma  |16/06/2025  |1 día  |Equipo TutorMatch  |
+|Documentación de hallazgos preliminares  |17/06/2025  |1 día  |Equipo TutorMatch  |
+|Entrega del informe de evaluación de heurísticas final  |18/06/2025  |-  |Equipo TutorMatch  |
+
+3. Contenido de auditoría realizada. 
+
+**Movirent - Evaluación de Heurísticas y Principios UX** 
+
+- Carrera: Ingeniería de Software  
+- Curso: Diseño de Experimentos de Software - 1ASI0732  
+- Sección: 4453  
+- Profesores: Todos  
+- Auditor: SkillSwap (Equipo de TutorMatch)  
+- Cliente: Movirent  
+- Sitio o App a Evaluar: Movirent  
+
+*TAREAS A EVALUAR:* 
+
+El alcance de esta evaluación incluye la revisión de la usabilidad de las siguientes tareas: 
+
+- Búsqueda de scooters por distrito  
+- Visualización del perfil del propietario del scooter  
+- Proceso de reserva  
+- Proceso de suscripción premium  
+- Proceso de pago (simulado)  
+
+No están incluidas en esta versión de la evaluación las siguientes tareas: 
+
+1. Proceso de suscripción premium  
+1. Funcionalidades según nivel de suscripción  
+
+*ESCALA DE SEVERIDAD:* 
+
+|Nivel  |Descripción  |
+| - | - |
+|1  |Problema superficial: puede ser fácilmente superador por el usuario o puede ocurrir con muy poca frecuencia. No necesita ser arreglado a no ser que exista disponibilidad de tiempo.  |
+|2  |Problema menor: puede ocurrir un poco más frecuentemente o es un poco más difícil de superar para el usuario. Se le debería asignar una prioridad baja para resolverlo de cara al siguiente release  |
+|3  |Problema mayor: ocurre frecuentemente o los usuarios no son capaces de resolverlo por sí mismos. Es importante corregirlo y asignarle una prioridad alta.  |
+|4  |Problema muy grave: error de gran impacto que impide al usuario continuar con el uso de la herramienta. Es imperativo corregirlo antes del lanzamiento.  |
+
+*TABLA RESUMEN:* 
+
+|#  |Problema  |Escala de severidad  |Heurística violada  |
+| - | - | - | - |
+|1  |No se presenta información clara sobre la legalidad de la pasarela de pagos ni se menciona validación Sunat  |4  |1\. Visibility of System Status  |
+|2  |Falta de acuerdo SaaS accesible y visible para el usuario  |3  |<p>10\. Help and </p><p>Documentation  </p>|
+|3  |No hay advertencia visible sobre el límite de 5 reservas diarias  |3  |5\. Error Prevention  |
+|4  |No se explica qué sucede tras reportar a un arrendador por fraude  |2  |<p>9\. Help Users </p><p>Recognize, Diagnose, and Recover from Errors  </p>|
+
+*DESCRIPCIÓN DE PROBLEMAS:* 
+
+
+
+|PROBLEMA #1: Falta de transparencia legal en la pasarela de pagos  |
 | - |
-|**Prueba con selenium:** |
-
-![](assets/Aspose.Words.3512cffb-c000-4760-a8ee-a98d826675de.152.png)
-
-Capítulo VII: DevOps Practices 
-
-1. Continuous Integration 
-
-Para el proyecto TutorMatch, desarrollado con React y TypeScript, hemos implementado un sistema de integración continua basado en GitHub Actions. Utilizamos Vitest como framework principal de testing, complementado con React Testing Library para evaluar los componentes de UI desde la perspectiva del usuario. Con cada commit, nuestro pipeline ejecuta una serie de pasos automatizados que incluyen validación de código con ESLint, comprobación de tipos con TypeScript, pruebas unitarias e integraciones, y despliegue automático a Netlify. 
-
-En proyectos donde utilizamos NestJS, empleamos Jest, el framework de testing oficial y preconfigurado, que ofrece excelente soporte para TypeScript. Esta combinación de herramientas nos permite detectar errores de forma temprana, mantener la calidad del código y acelerar el desarrollo de nuevas funcionalidades. 
-
-![ref10]
-
-1. Tools and Practices. 
-
-Para la implementación de TutorMatch, desplegamos el frontend en Netlify y el backend en Railway.  Adoptamos  Gitflow  para  la  gestión  de  ramas  en  GitHub,  junto  con  Conventional Commits  para  una  estructura  clara  en  nuestros  mensajes  de  commit  y  SemVer  para  el versionamiento.  Implementamos  integración  continua  con  GitHub  Actions,  ejecutando automáticamente validación con ESLint, comprobación de tipos con TypeScript, y pruebas con Vitest  y  React  Testing  Library  para  el  frontend  y  Jest  para  componentes  NestJS.  Esta infraestructura nos permite detectar errores tempranamente y mantener alta calidad en el código. 
+|<p>Severidad: 4  </p><p>Heurística violada: 1. Visibility of System Status  </p>|
+|<p>Descripción:  </p><p>No se especifica si la pasarela de pago cumple con los requisitos legales de SUNAT (como emitir comprobantes electrónicos o autorización oficial).  </p>|
+|<p>Recomendación:  </p><p>Mostrar claramente en la sección de pagos si se cuenta con autorización oficial. Incluir un enlace a los términos legales o emitir comprobantes válidos desde la plataforma.  </p>|
 
 
 
-||<p>Jasmine </p><p>![](assets/Aspose.Words.3512cffb-c000-4760-a8ee-a98d826675de.154.png)</p>|<p>Jest </p><p>![ref11]</p>|<p>Cypress </p><p>![](assets/Aspose.Words.3512cffb-c000-4760-a8ee-a98d826675de.156.png)</p>|
-| :- | - | - | - |
-|Características |` `Framework de testing para JavaScript/TypeScript desarrollado por Facebook. Ofrece una solución completa "todo en uno" con runner de tests, |` `Framework BDD (Behavior-Driven Development) para JavaScript que no requiere dependencias adicionales. Utiliza una sintaxis legible y descriptiva con |Framework de testing end-to-end que ejecuta pruebas directamente en navegadores reales. Proporciona una interfaz gráfica interactiva para depuración con |
-
-
-
-||<p>assertions, mocks y cobertura de código integrados. Viene preconfigurado para proyectos React, Next.js y muchos otros frameworks. Su modo watch permite ejecución automatizada de tests al detectar cambios, con filtrado inteligente de pruebas relacionadas. Incluye testing de snapshots para UI, simulación del DOM con JSDOM, y potentes capacidades de mocking incluyendo módulos completos, implementaciones personalizadas y espías de funciones. Soporta pruebas asíncronas con Promises, async/await y callbacks. Su paralelización inteligente de pruebas optimiza el tiempo de </p><p>ejecución, especialmente en CI/CD. Proporciona reportes de cobertura de código detallados y una sintaxis clara basada en describe/it y matchers expresivos. </p>|<p>describe(), it(), beforeEach() y afterEach(). Incluye un sistema de expectativas (expects) y comparadores (matchers) expresivos y extensibles. Proporciona spies integrados para simular, rastrear y verificar llamadas a funciones. Soporta pruebas asíncronas mediante callbacks, </p><p>Promises y async/await. Admite configuración personalizada para diferentes entornos, incluyendo navegadores y Node.js. Fomenta la documentación autoexplicativa con sus estructuras anidadas de suites de prueba. Ofrece capacidades de mocking para simular objetos complejos y aislar el código bajo prueba. Incluye herramientas de reporte personalizables para visualizar resultados de pruebas. </p>|<p>timeline visual, snapshots en cada paso y grabación automática de videos. Ofrece esperas automáticas inteligentes sin necesidad de timeouts </p><p>o retries manuales. Permite acceso directo al DOM, red, almacenamiento local y cookies del navegador durante las pruebas. Incluye herramientas de stub, spy y clock para controlar el comportamiento de la aplicación. Facilita la simulación de estados de la aplicación y puede preservar el estado entre pruebas. Soporta pruebas en múltiples navegadores y configuraciones responsive. Proporciona integración con CI/CD y herramientas como GitHub Actions, CircleCI y Jenkins. Permite la captura de capturas de pantalla en fallos automáticamente y ofrece plugins para extender funcionalidades (autenticación, componentes, accesibilidad). </p>|
-| :- | :- | :- | :- |
-
-![](assets/Aspose.Words.3512cffb-c000-4760-a8ee-a98d826675de.157.png)![](assets/Aspose.Words.3512cffb-c000-4760-a8ee-a98d826675de.158.png)![](assets/Aspose.Words.3512cffb-c000-4760-a8ee-a98d826675de.159.png)
-
-Para el caso de la integración continua era crucial que todos los integrantes de nuestro equipo siguieran un mismo workflow y este era: 
-
-1. Tras haber finalizado el desarrollo de una feature, el desarrollador debe ejecutar las pruebas automatizadas con Jest de manera local para verificar que no haya regresiones. 
-1. En caso de no existir problemas, se procede a realizar una pull request a la rama de desarrollo,  etiquetándola  con  el  formato  (#NUMERO\_DE\_LA\_PR)  y  añadiendo  los detalles necesarios según el estándar de Conventional Commits. 
-1. Al llegar la pull request al repositorio remoto, se ejecutan automáticamente los pipelines de GitHub Actions que realizan validación de código con ESLint, comprobación de tipos con TypeScript y las suites de pruebas completas con Jest. 
-1. Si los pipelines son exitosos, la feature pasa a la rama "release" donde se realizan pruebas adicionales de integración en un entorno similar a producción. 
-1. En caso de no detectar ningún problema, se envía una pull request final a la rama main que tras  su  aprobación  despliega  automáticamente  a  producción  en  Netlify/Railway.  De detectarse algún problema, se devuelve a la rama del desarrollador para corrección de bugs e inicio del ciclo nuevamente. 
-2. Build & Test Suite Pipeline Components. 
-
-
-
-|<p>**Epic 03: Creación y Gestión de Tutorías**  Como tutor,  </p><p>quiero crear y gestionar mis tutorías en la plataforma para que los estudiantes puedan verlas. </p>|
-| :-: |
-|<p>**US01: Publicación de Tutorías** Como tutor,  </p><p>quiero poder crear una publicación de tutoría que incluya el nombre del curso, una breve descripción, costo, disponibilidad, automáticamente una foto representativa de lo que se aprenderá en la tutoría, y la calificación del curso,  </p><p>para atraer estudiantes interesados en mis servicios.** </p>|
-|**Escenario 1: Creación de Publicación de Tutoría** |
-
-
-
-|<p>Dado que el tutor está en la página de publicación. Cuando completa los campos requeridos y envía la publicación. </p><p>Entonces se debe crear una nueva entrada de tutoría en la plataforma con la información proporcionada </p>|
-| :- |
-|<p>**Prueba con selenium:** </p><p>![](assets/Aspose.Words.3512cffb-c000-4760-a8ee-a98d826675de.160.jpeg)</p>|
-
-
-
-|<p>**Epic 01: Registro y Autenticación de Usuarios**  </p><p>Como usuario,  </p><p>quiero registrarme y acceder a la plataforma de forma segura para utilizar los servicios disponibles según mi rol (estudiante o tutor). </p>|
+|PROBLEMA #2: Falta de Acuerdo SaaS visible y accesible  |
 | - |
-|<p>**US02: Registro de usuario** </p><p>Como nuevo usuario,  </p><p>quiero registrarme proporcionando información básica  para crear una cuenta en la plataforma.** </p>|
+|<p>Severidad: 3  </p><p>Heurística violada: 10. Help and Documentation  </p>|
+|<p>Descripción:  </p><p>La plataforma no presenta un contrato SaaS al momento de suscribirse, lo cual puede generar dudas legales y de responsabilidad.  </p>|
+|<p>Recomendación:  </p><p>Incluir un enlace visible al Acuerdo SaaS en la pantalla de registro y en el footer del sitio. Solicitar aceptación explícita durante la suscripción.  </p>|
 
 
 
-|<p>**Escenario 1: Registro Exitoso** </p><p>Dado que un usuario no registrado está en la página de registro.  </p><p>Cuando completa todos los campos requeridos correctamente y envía el formulario Entonces el sistema crea su nueva cuenta y el sistema envía una confirmación por email. **Escenario 2: Validación de Datos** </p><p>Dado que un usuario está completando el formulario de registro.  </p><p>Cuando ingresa datos inválidos (email mal formateado, contraseña débil)  </p><p>Entonces el sistema muestra mensajes de error específicos y no permite completar el registro.** </p>|
+|PROBLEMA #3: El usuario no recibe advertencia sobre límite diario de reservas  |
 | - |
-|<p>**Prueba con selenium:** Escenario 1 </p><p>![](assets/Aspose.Words.3512cffb-c000-4760-a8ee-a98d826675de.161.jpeg)</p><p>Escenario 2 </p>|
+|<p>Severidad: 3  </p><p>Heurística violada: 5. Error Prevention  </p>|
+|<p>Descripción:  </p><p>No se advierte claramente que el límite es de 5 reservas diarias. Esto puede provocar frustración cuando el usuario lo descubra por error al realizar múltiples intentos extra sin aprobación.  </p>|
+|<p>Recomendación:  </p><p>Mostrar claramente esta limitación en el momento de la contratación y bloquear reservas adicionales con un mensaje explicativo.  </p>|
 
-![](assets/Aspose.Words.3512cffb-c000-4760-a8ee-a98d826675de.162.png)
 
 
-
-|<p>**Epic 01: Registro y Autenticación de Usuarios** </p><p>Como usuario,  </p><p>quiero registrarme y acceder a la plataforma de forma segura para utilizar los servicios disponibles según mi rol (estudiante o tutor). </p>|
+|PROBLEMA #4: Reportar un fraude no tiene retroalimentación clara  |
 | - |
-|<p>**US03: Inicio de Sesión** </p><p>Como usuario,  </p><p>quiero iniciar sesión con mi correo y contraseña  para acceder a mi cuenta. </p>|
-|<p>**Escenario 1: Inicio de Sesión Exitoso** </p><p>Dado que un usuario registrado está en la página de inicio de sesión. Cuando ingresa credenciales correctas. </p><p>Entonces el usuario accede a su cuenta y es dirigido al dashboard.** </p>|
+|<p>Severidad: 2  </p><p>Heurística violada: 9. Help Users Recognize, Diagnose, and Recover from Errors  </p>|
+|<p>Descripción:  </p><p>No hay información sobre qué pasa después de reportar un usuario, ni confirmación del envío del reporte.  </p>|
+|<p>Recomendación:  </p><p>Mostrar mensaje de confirmación tras enviar el reporte, y describir brevemente el proceso posterior (por ejemplo: "Nuestro equipo revisará tu denuncia").  </p>|
 
-**Prueba con selenium:** ![](assets/Aspose.Words.3512cffb-c000-4760-a8ee-a98d826675de.163.png)![](assets/Aspose.Words.3512cffb-c000-4760-a8ee-a98d826675de.164.jpeg)
+2. Auditoría recibida. 
+1. Información del grupo auditor. 
+- Nombre del grupo auditor: Movirent  
+- Responsable del equipo: Mathias Alejandro Jave Diaz  
+- Integrantes del equipo auditor:  
+- Mathias Alejandro Jave Diaz  
+- Sebastian Valente Lobato Pozo  
+- Mathias Adriano Hidalgo Lopez  
+- Alexandra Belen Ramos Argüelles  
+- Gustavo Huilca Chipana  
+- Objetivo de la auditoría: Evaluar la usabilidad de las funciones principales de la plataforma TutorMatch, identificar hallazgos críticos y proponer mejoras alineadas a principios de usabilidad reconocidos (heurísticas de Nielsen).  
+2. Cronograma de auditoría recibida. 
 
 
 
-|<p>**Epic 01: Registro y Autenticación de Usuarios** </p><p>Como usuario,  </p><p>quiero registrarme y acceder a la plataforma de forma segura para utilizar los servicios disponibles según mi rol (estudiante o tutor). </p>|
+|**Actividad**  |**Fecha de ejecución** |` `**Duración estimada** |**Responsables**  |
+| - | - | - | - |
+|Planificación de auditoría  |12/06/2025  |1 día  |Equipo Movirent  |
+|Evaluación heurística de la plataforma  |13/06/2025 – 16/06/2025  |3 días  |Equipo Movirent  |
+|Documentación de hallazgos preliminares  |17/06/2025  |1 día  |Equipo Movirent  |
+|Reunión de retroalimentación  |18/06/2025  |2 horas  |Auditores + equipo TutorMatch  |
+|Entrega del informe de evaluación de heurísticas final  |18/06/2025  |-  |Equipo Movirent  |
+
+3. Contenido de auditoría recibida 
+
+**TutorMatch - Evaluación de Heurísticas y Principios UX** 
+
+- Carrera: Ingeniería de Software  
+- Curso: Diseño de Experimentos de Software - 1ASI0732  
+- Sección: 4453  
+- Profesores: Todos  
+- Auditor: Movirent  
+- Cliente: SkillSwap  
+- Sitio o App a Evaluar: TutorMatch  
+
+*TAREAS A EVALUAR:* 
+
+El alcance de esta evaluación incluye la revisión de la usabilidad de las siguientes tareas: 
+
+1. Registro de un usuario nuevo  
+1. Inicio de sesión con correo de la universidad  
+1. Visualización del listado de tutorías disponibles  
+1. Filtro de tutorías por curso, ciclo o modalidad  
+1. Solicitud de tutoría a través de contacto externo (Outlook o WhatsApp)  
+1. Creación y edición de tutorías por parte del tutor  
+1. Visualización del perfil del tutor  
+1. Comprensión del reglamento y condiciones de uso  
+
+No están incluidas en esta versión de la evaluación las siguientes tareas: 
+
+3. Sistema de reseñas (en desarrollo)  
+3. Gestión de notificaciones  
+3. Pagos internos o pasarela de pagos (prohibido por el reglamento)  
+
+*ESCALA DE SEVERIDAD:* 
+
+|Nivel  |Descripción  |
+| - | - |
+|1  |Problema superficial: puede ser fácilmente superador por el usuario o puede ocurrir con muy poca frecuencia. No necesita ser arreglado a no ser que exista disponibilidad de tiempo.  |
+|2  |Problema menor: puede ocurrir un poco más frecuentemente o es un poco más difícil de superar para el usuario. Se le debería asignar una prioridad baja para resolverlo de cara al siguiente release  |
+|3  |Problema mayor: ocurre frecuentemente o los usuarios no son capaces de resolverlo por sí mismos. Es importante corregirlo y asignarle una prioridad alta.  |
+|4  |Problema muy grave: error de gran impacto que impide al usuario continuar con el uso de la herramienta. Es imperativo corregirlo antes del lanzamiento.  |
+
+*TABLA RESUMEN:* 
+
+|#  |Problema  |Escala de severidad  |Heurística violada  |
+| - | - | - | - |
+|1  |El mensaje sobre el pago externo no es visible ni claro al momento de solicitar una tutoría  |3  |1\. Visibility of System Status  |
+|2  |Los cambios en la actualización del perfil no son visibles al instante  |2  |1\. Visibility of System Status  |
+|3  |Los mensajes de alerta se acumulan, mostrando errores y confirmaciones simultáneamente  |3  |<p>9\. Help Users </p><p>Recognize, Diagnose, and Recover from Errors  </p>|
+|4  |El correo de confirmación de cuenta tarda en llegar, generando incertidumbre  |3  |1\. Visibility of System Status  |
+
+*DESCRIPCIÓN DE PROBLEMAS:* 
+
+
+
+|PROBLEMA #1: El mensaje sobre el pago externo no es visible ni claro  |
 | - |
-|<p>**US04: Selección de Rol** Como usuario,  </p><p>quiero poder seleccionar mi rol (estudiante o tutor) durante el registro para acceder a las funcionalidades correspondientes </p><p>para acceder a mi cuenta. </p>|
-|<p>**Escenario 1: Selección de Rol** </p><p>Dado que un usuario está completando el registro.   </p><p>Cuando selecciona su rol como "Estudiante" o "Tutor".   </p><p>Entonces esta información se guarda y determina las funcionalidades disponibles.**   </p>|
+|<p>Severidad: 3  </p><p>Heurística violada: 1. Visibility of System Status  </p>|
+|<p>Descripción:  </p><p>Cuando un estudiante solicita una tutoría, el sistema no comunica de forma destacada que el pago se coordina externamente, lo que puede generar confusión.  </p>|
+|<p>Recomendación:  </p><p>Agregar un mensaje visible con ícono de advertencia al final del flujo de solicitud y una casilla de confirmación tipo: "He leído y acepto que el pago se realiza fuera de la plataforma."  </p>|
+
+PROBLEMA #2: Los cambios en la actualización del perfil no son visibles al instante  ![](assets/Aspose.Words.fec16d32-2b63-487b-8c4b-410bcc9e6ec5.033.png)
 
 
 
-|<p>**Epic 01: Registro y Autenticación de Usuarios** </p><p>Como usuario,  </p><p>quiero registrarme y acceder a la plataforma de forma segura para utilizar los servicios disponibles según mi rol (estudiante o tutor).** </p>|
+|<p>Severidad: 2  </p><p>Heurística violada: 1. Visibility of System Status  </p>|
 | - |
-|<p>**US05: Recuperación de Contraseña** </p><p>Como usuario,  </p><p>quiero poder recuperar mi contraseña mediante un enlace enviado a mi correo  para acceder a mi cuenta si la olvido. </p>|
-|<p>**Escenario 1: Solicitud de Recuperación**  </p><p>Dado que un usuario olvidó su contraseña.   </p><p>Cuando solicita recuperación proporcionando su correo registrado.  Entonces recibe un email con instrucciones.   </p>|
-
-**Epic 02: Gestión de Perfil de Usuario ![](assets/Aspose.Words.3512cffb-c000-4760-a8ee-a98d826675de.165.png)![](assets/Aspose.Words.3512cffb-c000-4760-a8ee-a98d826675de.166.png)**Como usuario,  
+|<p>Descripción:  </p><p>Al actualizar datos del perfil, no hay retroalimentación inmediata ni cambio visual, lo que puede hacer pensar que no se guardaron los cambios.  </p>|
+|<p>Recomendación:  </p><p>Mostrar mensaje de confirmación claro y actualizar la información en pantalla sin necesidad de recargar la página.  </p>|
 
 
 
-
-|<p>quiero gestionar mi perfil  </p><p>para mantener actualizada mi información personal y académica. </p>|
+|PROBLEMA #3: Los mensajes de alerta se acumulan o superponen  |
 | - |
-|<p>**US06: Completar Perfil** </p><p>Como usuario,  </p><p>quiero completar mi perfil con información personal, académica y una foto  para que otros usuarios me conozcan mejor. </p>|
-|<p>**Escenario 1: Edición de Perfil** </p><p>Dado que un usuario está en la sección de perfil.   </p><p>Cuando completa y guarda su información personal y foto.   Entonces estos datos se actualizan y son visibles para otros usuarios.   **Escenario 2: Visualización de Perfil**  </p><p>Dado que un usuario ha completado su perfil.  </p><p>Cuando otro usuario visita su perfil.   </p><p>Entonces puede ver toda la información pública compartida. </p>|
-|<p>**Prueba con selenium:** </p><p>![](assets/Aspose.Words.3512cffb-c000-4760-a8ee-a98d826675de.167.jpeg)</p>|
-
-![](assets/Aspose.Words.3512cffb-c000-4760-a8ee-a98d826675de.168.png)
-
-**Epic 02: Gestión de Perfil de Usuario ![](assets/Aspose.Words.3512cffb-c000-4760-a8ee-a98d826675de.169.png)**Como usuario,  
-
-quiero gestionar mi perfil  
+|<p>Severidad: 3  </p><p>Heurística violada: 9. Help Users Recognize, Diagnose, and Recover from Errors  </p>|
+|<p>Descripción:  </p><p>En algunos flujos, pueden mostrarse mensajes de error y confirmación al mismo tiempo, lo que genera ambigüedad sobre el resultado de la acción.  </p>|
+|<p>Recomendación:  </p><p>Asegurar que al aparecer un nuevo mensaje, los anteriores se oculten automáticamente. Evitar mostrar mensajes contradictorios juntos.  </p>|
 
 
 
-|para mantener actualizada mi información personal y académica. |
+|PROBLEMA #4: El correo de confirmación de cuenta tarda en llegar  |
 | - |
-|<p>**US07: Definir Áreas de Conocimiento** </p><p>Como tutor,  </p><p>quiero añadir mis áreas de conocimiento y experiencia a mi perfil  para que los estudiantes conozcan mis habilidades. </p>|
-|<p>**Escenario 1: Agregar Áreas de Conocimiento** </p><p>Dado que un tutor está editando su perfil. </p><p>Cuando selecciona y guarda sus áreas de especialización.   </p><p>Entonces estas áreas aparecen en su perfil y se consideran en los filtros de búsqueda.   **Escenario 2: Visualización de Especialidades**  </p><p>Dado que un tutor ha definido sus áreas de conocimiento.   </p><p>Cuando un estudiante visita su perfil.   </p><p>Entonces puede ver claramente las especialidades del tutor. </p>|
-|<p>**Prueba con selenium:** </p><p>![](assets/Aspose.Words.3512cffb-c000-4760-a8ee-a98d826675de.170.jpeg)</p>|
+|<p>Severidad: 3  </p><p>Heurística violada: 1. Visibility of System Status  </p>|
+|<p>Descripción:  </p><p>Después de registrarse, algunos usuarios reportan una demora prolongada en la llegada del correo de verificación, lo que puede generar frustración o abandono.  </p>|
+|<p>Recomendación:  </p><p>Mostrar un mensaje tras el registro indicando que el correo puede tardar algunos minutos, e incluir una opción para reenviar el enlace si no se recibe.  </p>|
 
-![](assets/Aspose.Words.3512cffb-c000-4760-a8ee-a98d826675de.171.png)
+4. Resumen de modificaciones para subsanar hallazgos 
 
 
 
-|<p>**Epic 03:** **Creación y Gestión de Tutorías** Como tutor,  </p><p>quiero crear y gestionar mis tutorías en la plataforma  para que los estudiantes puedan verlas. </p>|
-| :-: |
-|<p>**US08: Crear Tutoría** </p><p>Como tutor, </p><p>quiero crear una nueva tutoría especificando materia, horario y descripción  para ofrecerla a los estudiantes. </p>|
-|<p>**Escenario 1: Creación Exitosa** </p><p>Dado que un tutor está en la sección de creación de tutorías.   Cuando completa todos los campos requeridos y publica la tutoría.   Entonces la tutoría queda disponible para ser vista por estudiantes. </p><p>**Escenario 02: Validación de Datos** </p>|
+|#  |Hallazgo identificado  |Modificación propuesta  |Escala de severidad  |Prioridad  |
+| - | - | - | :- | - |
+|1  |El mensaje sobre el pago externo no es visible ni claro  |` `Incluir un mensaje destacado en el paso final de solicitud con ícono de advertencia y casilla de aceptación.  |` `3  |Alta  |
+|2  |Los cambios en el perfil no se visualizan al instante  |Implementar confirmaciones visuales inmediatas (toasts) y actualizar los datos en pantalla sin recargar.  |2  |Media  |
+|3  |Se muestran mensajes de error y éxito al mismo tiempo en algunos flujos |<p>` `Establecer un sistema de control para limpiar alertas anteriores </p><p>` `antes de mostrar nuevas.  </p>|3  |Alta  |
+|4  |El correo de confirmación de cuenta tarda en llegar, |Agregar mensaje post-registro informando posible demora y botón para reenviar correo.  |3  |Alta  |
 
 
 
-|<p>Dado que un tutor está creando una tutoría.   </p><p>Cuando ingresa datos inválidos o deja campos obligatorios en blanco.   </p><p>Entonces recibe alertas de error y no puede publicar hasta corregir.** </p>|
-| - |
-|<p>**Prueba con selenium:** </p><p>![](assets/Aspose.Words.3512cffb-c000-4760-a8ee-a98d826675de.172.jpeg)</p><p>![](assets/Aspose.Words.3512cffb-c000-4760-a8ee-a98d826675de.173.jpeg)</p>|
+||generando incertidumbre  ||||
+| :- | :- | :- | :- | :- |
 
 
-
-|<p>**Epic 03:** **Creación y Gestión de Tutorías** Como tutor,  </p><p>quiero crear y gestionar mis tutorías en la plataforma  para que los estudiantes puedan verlas. </p>|
-| :-: |
-|<p>**US09: Listar Tutorías Creadas** </p><p>Como tutor,  </p><p>quiero ver el listado de todas mis tutorías creadas  para llevar un control de ellas. </p>|
-|<p>**Escenario 1: Visualización de Listado** </p><p>Dado que un tutor ha creado varias tutorías. </p><p>Cuando accede a la sección "Mis Tutorías". </p><p>Entonces ve un listado organizado con todas sus publicaciones activas. **Escenario 2:** **Acciones Sobre el Listado** </p><p>Dado que un tutor está viendo su lista de tutorías.   </p><p>Cuando selecciona una tutoría específica.   </p><p>Entonces puede acceder a opciones para editarla o eliminarla.** </p>|
-|**Prueba con selenium:** |
-
-![](assets/Aspose.Words.3512cffb-c000-4760-a8ee-a98d826675de.174.png)
-
-
-
-|<p>**Epic 03:** **Creación y Gestión de Tutorías** Como tutor,  </p><p>quiero crear y gestionar mis tutorías en la plataforma  para que los estudiantes puedan verlas. </p>|
-| :-: |
-|<p>**US10: Editar Tutorías Creadas** Como tutor,  </p><p>quiero editar los detalles de mis tutorías  para mantenerlas actualizadas. </p>|
-|<p>**Escenario 1:  Actualización de Información**   </p><p>Dado que un tutor selecciona "Editar" en una de sus tutorías.   Cuando modifica la información y guarda los cambios.   Entonces la tutoría se actualiza con los nuevos datos.  **Escenario 2: Cancelación de Edición** </p>|
-
-
-
-|Dado que un tutor está editando una tutoría.   Cuando decide cancelar sin guardar los cambios.   Entonces la tutoría mantiene su información original.** |
-| :-: |
-|<p>**Prueba con selenium:** </p><p>![](assets/Aspose.Words.3512cffb-c000-4760-a8ee-a98d826675de.175.jpeg)</p>|
-
-
-
-|<p>**Epic 03:** **Creación y Gestión de Tutorías** Como tutor,  </p><p>quiero crear y gestionar mis tutorías en la plataforma  para que los estudiantes puedan verlas. </p>|
-| :-: |
-|<p>**US11: Eliminar Tutorías Creadas** Como tutor,  </p><p>quiero eliminar tutorías que ya no voy a ofrecer para mantener mi catálogo actualizado. </p>|
-
-
-
-|<p>**Escenario 1: Eliminación Exitosa** </p><p>Dado que un tutor selecciona "Eliminar" en una de sus tutorías.   Cuando confirma la eliminación.   </p><p>Entonces la tutoría ya no aparece en su listado ni en búsquedas.   </p><p>**Escenario 2 Confirmación de Eliminación** </p><p>Dado que un tutor intenta eliminar una tutoría.   </p><p>Cuando el sistema solicita confirmación.   </p><p>Entonces el tutor debe confirmar antes de que se complete la eliminación. </p>|
-| - |
-|<p>**Prueba con selenium:** </p><p>![](assets/Aspose.Words.3512cffb-c000-4760-a8ee-a98d826675de.176.jpeg)</p>|
-
-**Epic 04: Visualización de Tutorías ![](assets/Aspose.Words.3512cffb-c000-4760-a8ee-a98d826675de.177.png)**Como estudiante,  
-
-quiero ver las tutorías disponibles  para encontrar ayuda académica. 
-
-
-
-|<p>**US12: Explorar Tutorías** </p><p>Como estudiante,  </p><p>quiero ver un listado general de tutorías disponibles  para encontrar las que me interesen. </p>|
-| - |
-|<p>**Escenario 1: Visualización del Catálogo**  </p><p>Dado que un estudiante accede a la sección de tutorías disponibles.  Cuando la página carga.  Entonces ve un listado de todas las tutorías activas con información básica.   </p><p>**Escenario 2: Paginación**   </p><p>**Dado que hay más tutorías de las que caben en una página.  Cuando el estudiante navega entre páginas.  Entonces puede visualizar todas las tutorías distribuidas en múltiples páginas.** </p>|
-|<p>**Prueba con selenium:** </p><p>![](assets/Aspose.Words.3512cffb-c000-4760-a8ee-a98d826675de.178.jpeg)</p>|
-
-**Epic 04: Visualización de Tutorías ![](assets/Aspose.Words.3512cffb-c000-4760-a8ee-a98d826675de.179.png)**
-
-
-
-|<p>Como estudiante,  </p><p>quiero ver las tutorías disponibles  para encontrar ayuda académica. </p>|
-| - |
-|<p>**US13: Ver Detalles de Tutoría** </p><p>Como estudiante,  </p><p>quiero ver los detalles completos de una tutoría específica  para evaluar si cumple con mis necesidades. </p>|
-|<p>**Escenario 1: Acceso a Detalles**   </p><p>Dado que un estudiante está explorando tutorías.   </p><p>Cuando hace clic en una tutoría específica.   </p><p>Entonces accede a una página con todos los detalles de esa tutoría.   **Escenario 2: Visualización del Perfil del Tutor**   </p><p>Dado que un estudiante está viendo los detalles de una tutoría.   Cuando hace clic en el nombre o foto del tutor.   </p><p>Entonces puede acceder al perfil completo del tutor. </p>|
-|**Prueba con selenium:** |
-
-![](assets/Aspose.Words.3512cffb-c000-4760-a8ee-a98d826675de.180.png)
-
-**Epic 05: Solicitud de Tutorías ![ref9]**Como estudiante, 
-
-quiero solicitar tutorías 
-
-
-
-|para ajustarme a mis necesidades académicas. |
-| - |
-|<p>**US14: Solicitar Tutoría** Como estudiante,  </p><p>quiero solicitar una tutoría específica  para recibir ayuda académica. </p>|
-|<p>**Escenario 1: Envío de Solicitud**   </p><p>Dado que un estudiante está viendo los detalles de una tutoría.  Cuando hace clic en "Solicitar" y confirma su interés.  Entonces se envía una notificación al tutor con su </p><p>solicitud.   </p><p>**Escenario 2: Confirmación de Solicitud**   </p><p>Dado que un estudiante ha enviado una solicitud.  Cuando el sistema procesa la solicitud.  Entonces recibe una confirmación de que su solicitud ha sido enviada. </p>|
-|<p>**Prueba con selenium:** </p><p>![](assets/Aspose.Words.3512cffb-c000-4760-a8ee-a98d826675de.181.jpeg)</p>|
-
-Además, se realizaron pruebas de rendimiento para el frontend desplegado: ![](assets/Aspose.Words.3512cffb-c000-4760-a8ee-a98d826675de.182.png)![](assets/Aspose.Words.3512cffb-c000-4760-a8ee-a98d826675de.183.jpeg)
-
-![](assets/Aspose.Words.3512cffb-c000-4760-a8ee-a98d826675de.184.jpeg)
-
-![](assets/Aspose.Words.3512cffb-c000-4760-a8ee-a98d826675de.185.jpeg)
-
-![](assets/Aspose.Words.3512cffb-c000-4760-a8ee-a98d826675de.186.jpeg)
-
-![](assets/Aspose.Words.3512cffb-c000-4760-a8ee-a98d826675de.187.jpeg)
-
-![](assets/Aspose.Words.3512cffb-c000-4760-a8ee-a98d826675de.188.jpeg)
-
-![](assets/Aspose.Words.3512cffb-c000-4760-a8ee-a98d826675de.189.jpeg)
-
-2. Continuous Delivery 
-
-En este apartado se puede encontrar tres puntos principales a tomar en cuenta: La automatización de pruebas (pruebas unitarias, pruebas de integración y pruebas funcionales y de aceptación), el entorno  de  pruebas  automatizado  y  las  pruebas  de  rendimiento  y  carga. 
-
-1. Tools and Practices. 
-
-Se puede emplear distintos tipos de herramientas, por ejemplo: 
-
-Jest: Framework principal de pruebas para nuestro backend NestJS, ofrece aserciones incorporadas, capacidades de mock y reportes de cobertura de código con excelente soporte para TypeScript. Implementamos una convención de nomenclatura consistente (nombreMétodo\_DadaCondición\_DeberíaResultadoEsperado) para pruebas descriptivas y mantenibles. 
-
-![](assets/Aspose.Words.3512cffb-c000-4760-a8ee-a98d826675de.190.png)
-
-Supertest: Herramienta complementaria para pruebas de integración de API, permite realizar solicitudes HTTP simuladas y validar completamente las respuestas, incluyendo códigos de estado y estructura de datos. 
-
-![](assets/Aspose.Words.3512cffb-c000-4760-a8ee-a98d826675de.191.png)
-
-GitHub Actions: Sistema de CI/CD que ejecuta automáticamente validaciones en cada pull request, incluyendo linting con ESLint, verificación de tipos con TypeScript y la suite completa de pruebas unitarias e integración. 
-
-![ref12]
-
-**Render**: Tu camino más rápido a producción. Crea, implementa y escala tus aplicaciones con una facilidad inigualable, desde tu primer usuario hasta el billonésimo. 
-
-![ref13]
-
-ESLint: Herramienta de análisis estático que aplica estándares de codificación con reglas personalizadas para aplicaciones NestJS, cubriendo patrones específicos de TypeScript, mejores prácticas de seguridad y convenciones del framework. 
-
-![](assets/Aspose.Words.3512cffb-c000-4760-a8ee-a98d826675de.194.png)
-
-TypeScript: Lenguaje de programación tipado que garantiza una comprobación estricta de tipos, con una configuración que incluye aliases de ruta para importaciones limpias y soporte para metadatos de decoradores necesarios para la inyección de dependencias de NestJS. 
-
-![](assets/Aspose.Words.3512cffb-c000-4760-a8ee-a98d826675de.195.png)
-
-TypeORM: Gestiona cambios en la base de datos mediante migraciones con control de versiones, proporcionando un sistema consistente para la evolución del esquema de datos y generación de datos de prueba. 
-
-![](assets/Aspose.Words.3512cffb-c000-4760-a8ee-a98d826675de.196.png)
-
-2. Stages Deployment Pipeline Components. 
-
-A continuación, se describen las etapas del pipeline de despliegue implementado en el proyecto TutorMatch Backend. Cada etapa está diseñada para garantizar una entrega continua y efectiva del software. 
-
-1. **Code Commit**: Se inicia cuando un desarrollador realiza un commit en el repositorio de código. Los commits siguen la convención de Conventional Commits para mantener una estructura clara en los mensajes. La herramienta utilizada es Git con GitHub como plataforma de alojamiento del repositorio. 
-1. **Linting y Verificación de Tipos**: En esta fase, se ejecutan herramientas de análisis estático de código como ESLint para validar la calidad del código y TypeScript para verificar la correcta tipificación. Esto asegura que el código sea robusto y cumpla con los estándares establecidos antes de continuar con el proceso. 
-1. **Build**: El código se compila utilizando el compilador de TypeScript y NestJS CLI para generar los artefactos necesarios para la ejecución. Este proceso verifica que no existan errores de compilación y prepara la aplicación para las pruebas y el despliegue. 
-1. **Test Unitarios**: Se ejecutan pruebas unitarias con Jest para verificar el funcionamiento de componentes individuales como servicios y repositorios. Estas pruebas validan que cada unidad de código funcione correctamente de manera aislada. 
-5. **Test de Integración**: Se utilizan pruebas de integración con Supertest y Jest para validar la interacción entre diferentes componentes del sistema, como controladores, servicios y repositorios. Estas pruebas aseguran que los componentes funcionen correctamente cuando se integran. 
-5. **Análisis de Cobertura**: Se genera un informe de cobertura de código utilizando las capacidades integradas de Jest para medir qué porcentaje del código está cubierto por pruebas. Esto ayuda a identificar áreas que requieren pruebas adicionales. 
-5. **Staging**: La aplicación se despliega en el entorno de staging en Railway, donde se realizan pruebas adicionales en un ambiente similar a producción. Se verifica la interacción con servicios externos como Supabase (base de datos y almacenamiento). 
-5. **Production Release**: Tras la aprobación en el entorno de staging, la aplicación se despliega en el entorno de producción en Railway. Este despliegue se realiza automáticamente después de la incorporación de cambios en la rama principal tras una revisión de código exitosa. 
-5. **Monitoreo Post-Despliegue**: Una vez desplegada, la aplicación es monitoreada para verificar su correcto funcionamiento y rendimiento. Se utilizan herramientas como Winston para registro estructurado y Sentry para seguimiento de errores, permitiendo una respuesta rápida a posibles problemas. 
-3. Continuous deployment 
-
-El despliegue continuo es una práctica fundamental en el desarrollo de software moderno, que automatiza la entrega de cambios al entorno de producción. En esta sección se describen las herramientas y procesos implementados para asegurar un flujo de trabajo eficiente, permitiendo que el software sea desplegado de manera rápida, segura y consistente. 
-
-1. Tools and Practices. 
-
-**GitHub Actions**: Es el motor principal de automatización de CI/CD en nuestro proyecto TutorMatch Backend. Configuramos flujos de trabajo que se activan con cada push o pull request, ejecutando una serie de validaciones como linting con ESLint, verificación estática de tipos con TypeScript, pruebas unitarias con Jest, y pruebas de integración con Supertest. Si todas las verificaciones son exitosas, se procede al despliegue automático en Railway. 
-
-![ref12]
-
-**Render**: Tu camino más rápido a producción. Crea, implementa y escala tus aplicaciones con una facilidad inigualable, desde tu primer usuario hasta el billonésimo. 
-
-![ref13]
-
-**ESLint + Prettier**: Herramientas integradas en nuestro pipeline para garantizar la calidad y consistencia del código. ESLint aplica reglas específicas para TypeScript y NestJS, mientras que Prettier asegura un formato uniforme según la configuración definida en nuestro proyecto, como el uso de comillas simples y trailing commas. 
-
-![](assets/Aspose.Words.3512cffb-c000-4760-a8ee-a98d826675de.197.png)
-
-2. Production Deployment Pipeline Components. **Despliegue en Render y Netlify:** 
-- Render: Utilizamos Render para el despliegue del backend, porque permite una integración sencilla con GitHub, ofrece despliegue automático continuo, soporte para variables de entorno, escalado automático y un entorno de producción con dominio personalizado, todo sin necesidad de gestionar infraestructura manualmente. 
-- Netlify:  Utilizamos  Netlify  para  el  despliegue  del  backend,  porque  permite  una configuración rápida mediante integración con Git, despliegue continuo con cada push, gestión sencilla de variables de entorno, funciones serverless para lógica del backend, y ofrece  HTTPS  automático,  lo  que  facilita  tener  un  entorno  de  producción  sin complicaciones. 
-
-**Pruebas Unitarias y de Integración:** 
-
-- Pruebas  Continuas:  Mantenemos  un  enfoque  riguroso  en  la  ejecución  de  pruebas automatizadas  utilizando  herramientas  como  Cucumber  para  pruebas  de  aceptación basadas en criterios de negocio, Selenium para pruebas de interfaz de usuario, y Vitest para pruebas unitarias en entornos JavaScript. Esto nos permite validar las funcionalidades clave antes de cada despliegue. 
-- Cobertura  de  Pruebas:  Utilizamos  herramientas  como  Vitest  y  reportes  de  cobertura integrados para asegurar que el código esté adecuadamente probado. Además, empleamos Lighthouse para auditar el rendimiento, la accesibilidad y las mejores prácticas en la aplicación, minimizando riesgos y asegurando calidad en producción. 
-
-El  proceso  de  despliegue  en  producción  de  la  aplicación  se  gestiona  mediante  un  pipeline automatizado que utiliza Render como plataforma de alojamiento del backend. Este flujo permite implementar de manera continua y eficiente los cambios aprobados en la rama principal del repositorio, garantizando una integración fluida entre el código fuente, los servicios desplegados y los entornos de producción. En la siguiente imagen se puede observar cómo Render se integra dentro del pipeline de despliegue para proporcionar un entorno de backend estable y escalable, facilitando la entrega continua de nuevas funcionalidades a los usuarios finales. 
-
-![](assets/Aspose.Words.3512cffb-c000-4760-a8ee-a98d826675de.198.jpeg)
-
-Además,  para garantizar la calidad del software y validar el cumplimiento de  los requisitos funcionales  definidos  en  el  product  backlog,  se  han  implementado  pruebas  automatizadas utilizando Selenium. Estas pruebas simulan la interacción del usuario con la aplicación y están alineadas con las historias de usuario priorizadas durante el desarrollo. A través de este enfoque, se  verifica  que  cada  funcionalidad  implementada  responde  correctamente  a  los  criterios  de aceptación establecidos por el equipo de producto. La siguiente imagen ilustra la ejecución de un conjunto de tests automatizados en Selenium, enfocados en validar escenarios clave definidos por las historias de usuario, como parte del proceso de aseguramiento de calidad previo al despliegue. 
-
-![](assets/Aspose.Words.3512cffb-c000-4760-a8ee-a98d826675de.199.jpeg)
-
-El despliegue del frontend de la aplicación se realiza mediante la plataforma Netlify, la cual permite una entrega continua y automatizada de la interfaz de usuario hacia producción. Gracias a su integración directa con sistemas de control de versiones como Git, Netlify detecta automáticamente los cambios realizados en la rama principal y ejecuta procesos de construcción y despliegue sin intervención manual. Esta estrategia facilita la disponibilidad inmediata de nuevas características visuales y mejoras en la experiencia del usuario. En la siguiente imagen se muestra cómo Netlify gestiona el pipeline de despliegue del frontend, incluyendo la detección de cambios, el build estático de los recursos, y su posterior publicación en un entorno seguro y escalable. 
-
-![](assets/Aspose.Words.3512cffb-c000-4760-a8ee-a98d826675de.200.jpeg)
 
 
 **Capítulo VII: DevOps Practices**
